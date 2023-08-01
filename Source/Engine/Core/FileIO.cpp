@@ -2,6 +2,8 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "Logger.h"
+
 using namespace std;
 
 namespace neko {
@@ -17,6 +19,10 @@ namespace neko {
         return ec.value() == 0;
     }
 
+    std::string getFileName(const std::filesystem::path& path) {
+        return path.filename().string();
+    }
+
     bool fileExists(const std::filesystem::path& path) {
         return std::filesystem::exists(path);
     }
@@ -29,7 +35,11 @@ namespace neko {
 
     }
     bool readFile(const std::filesystem::path& path, std::string& buffer) {
-        if (!fileExists(path)) return false;
+        if (!fileExists(path))
+        {
+            WARNING_LOG;
+            return false;
+        }
 
         size_t size;
         if (!getFileSize(path, size)) return false;

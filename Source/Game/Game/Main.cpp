@@ -25,6 +25,7 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	// pre setup
+	INFO_LOG;
 
 	// initialize memory tracker, set random seed and set file path
 	neko::MemoryTracker::initialize();
