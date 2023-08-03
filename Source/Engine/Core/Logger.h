@@ -8,7 +8,7 @@
 #define INFO_LOG(message) { if (neko::g_logger.log(neko::LogLevel::Info, __FILE__, __LINE__)) { neko::g_logger << message << "\n"; } }
 #define WARNING_LOG(message) { if (neko::g_logger.log(neko::LogLevel::Warning, __FILE__, __LINE__)) { neko::g_logger << message << "\n"; } }
 #define ERROR_LOG(message) { if (neko::g_logger.log(neko::LogLevel::Error, __FILE__, __LINE__)) { neko::g_logger << message << "\n"; } }
-#define ASSERT_LOG(condition, message) { if (!condition && neko::g_logger.log(neko::LogLevel::Assert, __FILE__, __LINE__)) { neko::g_logger << message << "\n"; } assert(condition); }
+#define ASSERT_LOG(condition, message) { if ( neko::g_logger.log(neko::LogLevel::Assert, __FILE__, __LINE__)) { neko::g_logger << message << "\n"; } assert(condition); }
 #else
 #define INFO_LOG(message) {}
 #define WARNING_LOG(message) {}

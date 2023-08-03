@@ -9,7 +9,7 @@ namespace neko {
 
 	bool Renderer::initialize() {
 		SDL_Init(SDL_INIT_VIDEO);
-		SDL_Init(IMG_INIT_JPG | IMG_INIT_PNG);
+		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 		TTF_Init();
 
 		return true;
@@ -68,6 +68,6 @@ namespace neko {
 			dest.h = size.y;
 
 			// https://wiki.libsdl.org/SDL2/SDL_RenderCopyEx
-			SDL_RenderCopyEx(m_renderer, texture->m_texture, NULL, NULL, angle, NULL, SDL_FLIP_NONE);
+			SDL_RenderCopyEx(m_renderer, texture->m_texture, NULL, &dest, angle, NULL, SDL_FLIP_NONE);
 	}
 }

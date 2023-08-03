@@ -1,21 +1,24 @@
 #pragma once
 #include "Core/Vector2.h"
-#include <SDL2-2.28.0/include/SDL_render.h>
+#include "Framework/Resoure/Resource.h"
 
-struct SLD_Texture;
+struct SDL_Texture;
 
 namespace neko {
-	class Texture {
+	class Texture : public Resource {
 	public:
 		Texture() = default;
 		~Texture();
 
-		bool create(class Renderer& renderer, const std::string& filename);
+		bool load(std::string filename, class Renderer& renderer);
 		vec2 getSize();
 
 		friend class Renderer;
 
 	private:
 		SDL_Texture* m_texture = nullptr;
+
+		// Inherited via Resource
+		virtual bool create(std::string& filename, ...) override;
 	};
 }
