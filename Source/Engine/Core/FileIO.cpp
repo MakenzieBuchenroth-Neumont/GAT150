@@ -37,7 +37,7 @@ namespace neko {
     bool readFile(const std::filesystem::path& path, std::string& buffer) {
         if (!fileExists(path))
         {
-            WARNING_LOG;
+            WARNING_LOG("Path not loaded: " << path.string());
             return false;
         }
 

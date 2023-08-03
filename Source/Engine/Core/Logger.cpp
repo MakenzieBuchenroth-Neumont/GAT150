@@ -4,7 +4,7 @@
 
 namespace neko {
 	
-	Logger g_logger(LogLevel::Info, &std::cout);
+	Logger g_logger(LogLevel::Info, &std::cout, "log.txt");
 
 	bool Logger::log(LogLevel logLevel, const std::string filename, int line) {
 		if (logLevel < m_logLevel) return false;
@@ -12,27 +12,27 @@ namespace neko {
 		switch (m_logLevel)
 		{
 		case LogLevel::Info:
-			*m_ostream << "INFO: ";
+			*this << "INFO: ";
 			break;
 
 		case LogLevel::Warning:
-			*m_ostream << "WARNING: ";
+			*this << "WARNING: ";
 			break;
 
 		case LogLevel::Error:
-			*m_ostream << "ERROR: ";
+			*this << "ERROR: ";
 			break;
 
 		case LogLevel::Assert:
-			*m_ostream << "ASSERT: ";
+			*this << "ASSERT: ";
 			break;
 
 		default:
 			break;
 		}
 
-		*m_ostream << filename << "(" << line << ")\n";
+		*this << getFileName(filename) << "(" << line << ") ";
 
-		return false;
+		return true;
 	}
 }

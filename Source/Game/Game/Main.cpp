@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include <memory>
+#include <cassert>
 
 #include "Core/Core.h"
 #include "Input/InputSystem.h"
@@ -15,6 +16,7 @@
 #include "Renderer/Text.h"
 #include "Renderer/Particle.h"
 #include "Renderer/ParticleSystem.h"
+#include "Renderer/Texture.h"
 
 #include "Framework/Emitter.h"
 
@@ -25,7 +27,11 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	// pre setup
-	INFO_LOG;
+	INFO_LOG("Hello World");
+
+	//create texture
+	shared_ptr<neko::Texture> texture = make_shared<neko::Texture>();
+	texture->create(neko::g_renderer, "balloonBoy.png");
 
 	// initialize memory tracker, set random seed and set file path
 	neko::MemoryTracker::initialize();
@@ -66,8 +72,9 @@ int main(int argc, char* argv[]) {
 		neko::g_renderer.setColor(0, 0, 0, 255);
 		neko::g_renderer.beginFrame();
 
-			game->draw(neko::g_renderer);
-			neko::g_renderer.endFrame();
+		neko::g_renderer.drawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
+		game->draw(neko::g_renderer);
+		neko::g_renderer.endFrame();
 
 	}
 		return 0;

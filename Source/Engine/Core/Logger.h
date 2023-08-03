@@ -3,11 +3,18 @@
 #include <fstream>
 #include <cassert>
 
+#ifdef _DEBUG
 
-#define INFO_LOG { neko::g_logger.log(neko::LogLevel::Info, __FILE__, __LINE__); }
-#define WARNING_LOG { neko::g_logger.log(neko::LogLevel::Warning, __FILE__, __LINE__); }
-#define ERROR_LOG { neko::g_logger.log(neko::LogLevel::Error, __FILE__, __LINE__); }
-#define ASSERT_LOG { neko::g_logger.log(neko::LogLevel::Assert, __FILE__, __LINE__); }
+#define INFO_LOG(message) { if (neko::g_logger.log(neko::LogLevel::Info, __FILE__, __LINE__)) { neko::g_logger << message << "\n"; } }
+#define WARNING_LOG(message) { if (neko::g_logger.log(neko::LogLevel::Warning, __FILE__, __LINE__)) { neko::g_logger << message << "\n"; } }
+#define ERROR_LOG(message) { if (neko::g_logger.log(neko::LogLevel::Error, __FILE__, __LINE__)) { neko::g_logger << message << "\n"; } }
+#define ASSERT_LOG(condition, message) { if (!condition && neko::g_logger.log(neko::LogLevel::Assert, __FILE__, __LINE__)) { neko::g_logger << message << "\n"; } assert(condition); }
+#else
+#define INFO_LOG(message) {}
+#define WARNING_LOG(message) {}
+#define ERROR_LOG(message) {}
+#define ASSERT_LOG(condition, message) {}
+#endif // _DEBUG
 
 namespace neko {
 	enum class LogLevel {
@@ -19,12 +26,17 @@ namespace neko {
 
 	class Logger {
 	public:
-		Logger(LogLevel logLevel, std::ostream* ostream) :
+		Logger(LogLevel logLevel, std::ostream* ostream, const std::string& filename = "") :
 			m_logLevel{ logLevel },
 			m_ostream{ ostream }
-		{}
+		{
+			if(!filename.empty()) m_fstream.open(filename);
+		}
 
 		bool log(LogLevel logLevel, const std::string filename, int line);
+
+		template<typename T>
+		Logger& operator << (T value);
 
 	private:
 		LogLevel m_logLevel;
@@ -33,5 +45,17 @@ namespace neko {
 	};
 
 	extern Logger g_logger;
+
+	template<typename T>
+	inline Logger& Logger::operator<<(T value)
+	{
+		if (m_ostream) *m_ostream << value;
+		if (m_fstream.is_open()) {
+			m_fstream << value;
+			m_fstream.flush();
+		}
+
+		return *this;
+	}
 
 }
