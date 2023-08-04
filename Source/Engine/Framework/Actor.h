@@ -2,6 +2,7 @@
 #include <memory>
 #include "Core/Core.h"
 #include "Renderer/Model.h"
+#include "Components/Component.h"
 
 namespace neko {
 	class Actor {
@@ -20,6 +21,8 @@ namespace neko {
 		virtual void update(float dt);
 		virtual void draw(neko::Renderer& renderer);
 
+		void addComponent(std::unique_ptr<Component> component);
+
 		float getRadius() { return (m_model) ? m_model->getRadius() * m_transform.scale : 0; }
 		virtual void onCollision(Actor* other) {}
 
@@ -36,7 +39,10 @@ namespace neko {
 
 		float m_lifespan = -1.0f;
 		bool m_destroyed = false;
+
 	protected:
+		std::vector<std::unique_ptr<Component>> m_components;
+
 		std::shared_ptr<Model> m_model;
 
 		vec2 m_velocity;

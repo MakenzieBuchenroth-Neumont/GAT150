@@ -1,6 +1,6 @@
 #pragma once
 #include "Core/Vector2.h"
-#include "Framework/Resoure/Resource.h"
+#include "Framework/Resource/Resource.h"
 
 struct SDL_Texture;
 
@@ -10,6 +10,8 @@ namespace neko {
 		Texture() = default;
 		~Texture();
 
+		virtual bool create(std::string filename, ...) override;
+
 		bool load(std::string filename, class Renderer& renderer);
 		vec2 getSize();
 
@@ -17,8 +19,5 @@ namespace neko {
 
 	private:
 		SDL_Texture* m_texture = nullptr;
-
-		// Inherited via Resource
-		virtual bool create(std::string& filename, ...) override;
 	};
 }

@@ -5,8 +5,11 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Resource">
+    <Filter Include="Source\Resource">
       <UniqueIdentifier>{c2e5a20b-dbd3-4182-afcd-a84ea9fc7ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Components">
+      <UniqueIdentifier>{15514c84-1a86-40c7-9f4f-20eb3c84ce88}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -22,11 +25,20 @@
     <ClInclude Include="Emitter.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Resoure\Resource.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
     <ClInclude Include="Resource\ResourceManager.h">
-      <Filter>Resource</Filter>
+      <Filter>Source\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Source\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Component.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RenderComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\SpriteComponent.h">
+      <Filter>Source\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -40,7 +52,10 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Resource\ResourceManager.cpp">
-      <Filter>Resource</Filter>
+      <Filter>Source\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\SpriteComponent.cpp">
+      <Filter>Source\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

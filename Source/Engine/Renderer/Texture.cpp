@@ -8,6 +8,16 @@ namespace neko {
 		if (m_texture) SDL_DestroyTexture(m_texture);
 	}
 
+	bool Texture::create(std::string filename, ...) {
+		va_list args;
+
+		va_start(args, filename);
+		Renderer& renderer = va_arg(args, Renderer);
+		va_end(args);
+
+		return load(filename, renderer);
+	}
+
 	bool Texture::load(std::string filename, Renderer& renderer) {
 		SDL_Surface* surface = IMG_Load(filename.c_str());
 		if (!surface) {
@@ -32,9 +42,5 @@ namespace neko {
 		SDL_QueryTexture(m_texture, NULL, NULL, &point.x, &point.y);
 
 		return vec2{ point.x, point.y };
-	}
-
-	bool Texture::create(std::string& filename, ...) {
-		return false;
 	}
 }

@@ -24,10 +24,25 @@
 
 #include "H_AsteroidField.h"
 #include "Star.h"
+#include "Framework/Resource/ResourceManager.h"
 
 using namespace std;
 
+void print(int count, ...)
+{
+	va_list args;
+
+	va_start(args, count);
+	for (int i = 0; i < count; ++i)
+	{
+		std::cout << va_arg(args, const char*) << std::endl;
+	}
+	va_end(args);
+}
+
 int main(int argc, char* argv[]) {
+	print(4, "hello", "world", "goodbye", "yo!");
+
 	// pre setup
 	INFO_LOG("Hello World");
 
@@ -46,8 +61,7 @@ int main(int argc, char* argv[]) {
 	game->initialize();
 
 	//create texture
-	shared_ptr<neko::Texture> texture = make_shared<neko::Texture>();
-	texture->load("balloonBoy.png", neko::g_renderer);
+	neko::res_t<neko::Texture> texture = neko::g_resourceManager.get<neko::Texture>("falcon.png", neko::g_renderer);
 
 	// main game loop
 	bool quit = false;
