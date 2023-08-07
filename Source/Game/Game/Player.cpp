@@ -5,11 +5,17 @@
 #include "Input/InputSystem.h"
 #include "Framework/Emitter.h"
 #include "Renderer/ParticleSystem.h"
+#include "Framework/Components/SpriteComponent.h"
+#include "Framework/Components/ModelRenderComponent.h"
+#include <Framework/Components/PhysicsComponent.h>
 
 
 void Player::update(float dt) {
 	Actor::update(dt);
 	neko::vec2 forward = neko::vec2{ 0, 0 };
+
+	auto physicsComponent = getComponent<neko::PhysicsComponent>();
+	//physicsComponent->applyForce(forward * m_speed * thrust);
 	
 	if (neko::g_inputSystem.getKeyDown(SDL_SCANCODE_W)) forward += {0, -1};
 	if (neko::g_inputSystem.getKeyDown(SDL_SCANCODE_S)) forward += {0, 1};

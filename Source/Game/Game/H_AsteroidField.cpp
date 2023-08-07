@@ -6,6 +6,7 @@
 #include "Framework/Scene.h"
 #include "Framework/Resource/ResourceManager.h"
 #include "Framework/Components/SpriteComponent.h"
+#include "Framework/Components/EnginePhysicsComponent.h"
 
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
@@ -95,9 +96,13 @@ void H_AsteroidField::update(float dt) {
 		player->m_tag = "Player";
 		player->m_game = this;
 		//create components
+		// sprite
 		std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
 		component->m_texture = neko::g_resourceManager.get<neko::Texture>("falcon.png", neko::g_renderer);
 		player->addComponent(std::move(component));
+		// physics
+		auto physicsComponent = std::make_unique<neko::EnginePhysicsComponent>();
+		player->addComponent(std::move(physicsComponent));
 
 		m_scene->add(std::move(player));
 	}
@@ -189,7 +194,7 @@ void H_AsteroidField::update(float dt) {
 	case H_AsteroidField::eState::GameOver:
 		m_scene->removeAll();
 
-		std::unique_ptr<Title> title = std::make_unique<Title>(neko::Transform{ { 400.0f, 250.0f }, neko::halfPi, 6}, neko::g_manager.get("empire.txt"));
+		std::unique_ptr<Title> title = std::make_unique<Title>(neko::Transform{ { 400.0f, 250.0f }, neko::halfPi, 6});//, add sprite);
 		title->m_tag = "Title";
 		title->m_game = this;
 		m_scene->add(std::move(title));

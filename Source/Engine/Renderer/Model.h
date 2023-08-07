@@ -1,10 +1,11 @@
 #pragma once
 #include "Core/Core.h"
 #include "Renderer.h"
+#include "Framework/Resource/Resource.h"
 #include <vector>
 
 namespace neko {
-	class Model {
+	class Model : public Resource{
 	public:
 		Model() = default;
 		Model(const std::vector<vec2>& points) : m_points{ points } {};
@@ -20,5 +21,8 @@ namespace neko {
 		std::vector<vec2> m_points;
 		Color m_color;
 		float m_radius = 0;
+
+		// Inherited via Resource
+		virtual bool create(std::string filename, ...) override;
 	};
 }

@@ -8,5 +8,4 @@
 
 void Title::update(float dt) {
 	Actor::update(dt);
-
 }

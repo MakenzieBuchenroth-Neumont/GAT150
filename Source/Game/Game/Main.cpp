@@ -60,6 +60,8 @@ int main(int argc, char* argv[]) {
 	unique_ptr<H_AsteroidField> game = make_unique<H_AsteroidField>();
 	game->initialize();
 
+	shared_ptr<neko::Texture> texture = make_shared<neko::Texture>();
+	texture->create("stars.png", neko::g_renderer);
 
 	// main game loop
 	bool quit = false;
@@ -85,7 +87,8 @@ int main(int argc, char* argv[]) {
 		// draw game
 		neko::g_renderer.setColor(0, 0, 0, 255);
 		neko::g_renderer.beginFrame();
-
+		// add background image
+		neko::g_renderer.drawTexture(texture.get(), 400.0f, 300.0f, 0.0f);
 		game->draw(neko::g_renderer);
 		neko::g_renderer.endFrame();
 

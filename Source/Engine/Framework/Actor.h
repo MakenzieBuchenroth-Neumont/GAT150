@@ -7,14 +7,10 @@
 namespace neko {
 	class Actor {
 	public:
-		Actor(const neko::Transform& transform, std::shared_ptr<Model> model) :
-			m_transform{ transform },
-			m_model{ model }
-		{}
+		Actor() = default;
 		Actor(const neko::Transform& transform) :
 			m_transform{ transform }
 		{}
-
 
 		void deleteActor(); 
 
@@ -22,12 +18,11 @@ namespace neko {
 		virtual void draw(neko::Renderer& renderer);
 
 		void addComponent(std::unique_ptr<Component> component);
+		template<typename T>
+		T* getComponent();
 
-		float getRadius() { return (m_model) ? m_model->getRadius() * m_transform.scale : 0; }
+		float getRadius() { return 30.0f; }
 		virtual void onCollision(Actor* other) {}
-
-		void addForce(const vec2& force) { m_velocity += force; }
-		void setDamping(float damping) { m_damping = damping; }
 
 		class Scene* m_scene = nullptr;
 		friend class Scene;
@@ -42,10 +37,15 @@ namespace neko {
 
 	protected:
 		std::vector<std::unique_ptr<Component>> m_components;
-
-		std::shared_ptr<Model> m_model;
-
-		vec2 m_velocity;
-		float m_damping = 0;
 	};
+
+	template<typename T>
+	inline T* Actor::getComponent() {
+		for (auto& component : m_components) {
+			T* result = dynamic_cast<T*>(component.get());
+			if (result) return result;
+		}
+
+		return nullptr;
+	}
 };

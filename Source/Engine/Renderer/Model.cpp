@@ -53,5 +53,10 @@ namespace neko {
 
 		return m_radius;
 	}
+
+	bool Model::create(std::string filename, ...)
+	{
+		return load(filename);
+	}
 }
 

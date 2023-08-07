@@ -8,8 +8,10 @@ namespace neko {
 			m_destroyed = (m_lifespan <= 0);
 		}
 
-		m_transform.position += m_velocity * dt;
-		m_velocity = std::pow(1 - m_damping, dt);
+		for (auto& component : m_components) {
+			component->update(dt);
+		}
+
 	}
 
 	void Actor::draw(neko::Renderer& renderer) {
