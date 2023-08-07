@@ -1,6 +1,7 @@
 #include "H_AsteroidField.h"
 #include "Player.h"
 #include "Enemy.h"
+#include <string>
 
 #include "Framework/Scene.h"
 #include "Framework/Resource/ResourceManager.h"
@@ -21,6 +22,7 @@
 #include "Powerup.h"
 
 neko::Highscore highscoreManager;
+std::string asteroid;
 
 bool H_AsteroidField::initialize() {
 	// initialize the input system
@@ -89,7 +91,7 @@ void H_AsteroidField::update(float dt) {
 		m_score = 0;
 	{
 			// create player
-		std::unique_ptr<Player> player = std::make_unique<Player>(200.0f, 0, neko::Transform{ {100.0f, 300.0f }, neko::halfPi, 6}, neko::g_manager.get("falcon.txt"));
+		std::unique_ptr<Player> player = std::make_unique<Player>(200.0f, 0, neko::Transform{ {100.0f, 300.0f }, 0, 6});
 		player->m_tag = "Player";
 		player->m_game = this;
 		//create components
@@ -114,20 +116,39 @@ void H_AsteroidField::update(float dt) {
 			m_spawnTimer = 0;
 			for (int i = 0; i < 5; i++) {
 				//create enemy
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(800.0f, 0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, neko::halfPi, 5}, neko::g_manager.get("asteroid.txt"));
+				std::string asteroid = "Asteroid1.png";
+				int j = neko::random(4);
+				if (j == 0) {
+					asteroid = "Asteroid1.png";
+				}
+				else if (j == 1) {
+					 asteroid = "Asteroid2.png";
+				}
+				else if (j == 2) {
+					 asteroid = "Asteroid3.png";
+				}
+				else if (j == 3) {
+					 asteroid = "Asteroid4.png";
+				}
+			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(800.0f, 0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, neko::halfPi, 5});
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
 			//create components
 			std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
-			component->m_texture = neko::g_resourceManager.get<neko::Texture>("Asteroid1.png", neko::g_renderer);
+			component->m_texture = neko::g_resourceManager.get<neko::Texture>(asteroid, neko::g_renderer);
 			enemy->addComponent(std::move(component));
 			m_scene->add(std::move(enemy));
 			}
 		}
 		if (m_powerupTimer <= 0) {
-			std::unique_ptr<Powerup> powerup = std::make_unique<Powerup>(0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, neko::halfPi, 5}, neko::g_manager.get("powerup.txt"));
+			// create powerup
+			std::unique_ptr<Powerup> powerup = std::make_unique<Powerup>(0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, 0, 5});
 			powerup->m_tag = "Powerup";
 			powerup->m_game = this;
+			// create components
+			std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
+			component->m_texture = neko::g_resourceManager.get<neko::Texture>("Powerup.png", neko::g_renderer);
+			powerup->addComponent(std::move(component));
 			m_scene->add(std::move(powerup));
 			m_powerupTimer = 32;
 		}

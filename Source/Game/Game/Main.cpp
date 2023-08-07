@@ -60,8 +60,6 @@ int main(int argc, char* argv[]) {
 	unique_ptr<H_AsteroidField> game = make_unique<H_AsteroidField>();
 	game->initialize();
 
-	//create texture
-	neko::res_t<neko::Texture> texture = neko::g_resourceManager.get<neko::Texture>("falcon.png", neko::g_renderer);
 
 	// main game loop
 	bool quit = false;
@@ -89,7 +87,6 @@ int main(int argc, char* argv[]) {
 		neko::g_renderer.beginFrame();
 
 		game->draw(neko::g_renderer);
-		neko::g_renderer.drawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
 		neko::g_renderer.endFrame();
 
 	}
