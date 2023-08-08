@@ -1,6 +1,14 @@
 #pragma once
-#include <string>
+#include "Font.h"
+#include "Highscore.h"
+#include "Model.h"
+#include "Particle.h"
+#include "ParticleSystem.h"
+#include "Text.h"
+#include "Texture.h"
+
 #include <SDL2-2.28.0/include/SDL.h>
+#include <string>
 
 namespace neko {
 	class Renderer {

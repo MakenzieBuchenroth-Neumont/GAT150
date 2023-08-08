@@ -6,59 +6,39 @@
 #include <map>
 
 #include "Core/Core.h"
+#include "Framework/Framework.h"
+#include "Renderer/Renderer.h"
 #include "Input/InputSystem.h"
-#include "Framework/Scene.h"
-#include "Player.h"
-#include "Enemy.h"
 #include "Audio/AudioSystem.h"
 
-#include "Renderer/Renderer.h"
-#include "Renderer/ModelManager.h"
-#include "Renderer/Font.h"
-#include "Renderer/Text.h"
-#include "Renderer/Particle.h"
-#include "Renderer/ParticleSystem.h"
-#include "Renderer/Texture.h"
-
-#include "Framework/Emitter.h"
-
+#include "Player.h"
+#include "Enemy.h"
 #include "H_AsteroidField.h"
+
 #include "Star.h"
-#include "Framework/Resource/ResourceManager.h"
 
 using namespace std;
 
-void print(int count, ...)
-{
-	va_list args;
-
-	va_start(args, count);
-	for (int i = 0; i < count; ++i)
-	{
-		std::cout << va_arg(args, const char*) << std::endl;
-	}
-	va_end(args);
-}
-
 int main(int argc, char* argv[]) {
-	print(4, "hello", "world", "goodbye", "yo!");
-
 	// pre setup
-	INFO_LOG("Hello World");
+	INFO_LOG("Initialized Engine...");
 
 
 	// initialize memory tracker, set random seed and set file path
 	neko::MemoryTracker::initialize();
+	INFO_LOG("Initialized Memory...");
 	neko::seedRandom((unsigned int)time(nullptr));
 	neko::setFilePath("Assets");
 
 	// create the game window
 	neko::g_renderer.initialize();
-	neko::g_renderer.createWindow("CSC196", 800, 600);
+	INFO_LOG("Initialized Renderer...");
+	neko::g_renderer.createWindow("Hoth Asteroid Field", 800, 600);
 
 	// initialize game
 	unique_ptr<H_AsteroidField> game = make_unique<H_AsteroidField>();
 	game->initialize();
+	INFO_LOG("Initialized Game...");
 
 	shared_ptr<neko::Texture> texture = make_shared<neko::Texture>();
 	texture->create("stars.png", neko::g_renderer);

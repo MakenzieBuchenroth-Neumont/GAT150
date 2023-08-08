@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include <Core/Vector2.h>
+#include <Core/math/Vector2.h>
 
 namespace neko {
 	class PhysicsComponent : public Component {

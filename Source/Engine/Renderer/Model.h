@@ -1,11 +1,12 @@
 #pragma once
 #include "Core/Core.h"
-#include "Renderer.h"
 #include "Framework/Resource/Resource.h"
 #include <vector>
 
 namespace neko {
-	class Model : public Resource{
+	class Renderer;
+
+	class Model : public Resource {
 	public:
 		Model() = default;
 		Model(const std::vector<vec2>& points) : m_points{ points } {};

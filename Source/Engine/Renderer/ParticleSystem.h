@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Particle.h"
 
 namespace neko {
@@ -11,7 +10,7 @@ namespace neko {
 			m_particles.resize(maxCount);
 		}
 		void update(float dt);
-		void draw(Renderer& renderer);
+		void draw(class Renderer& renderer);
 		Particle* getFreeParticle();
 	private:
 		std::vector<Particle> m_particles;

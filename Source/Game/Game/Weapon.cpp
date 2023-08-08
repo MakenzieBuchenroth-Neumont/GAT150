@@ -1,4 +1,5 @@
 #include "Weapon.h"
+#include "Renderer/Renderer.h"
 
 void Weapon::update(float dt) {
 	Actor::update(dt);

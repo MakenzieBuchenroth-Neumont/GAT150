@@ -1,7 +1,7 @@
 #include "Renderer.h"
 #include "SDL2-2.28.0/include/SDL_ttf.h"
 #include "SDL2-2.28.0/include/SDL_image.h"
-#include "Core/Vector2.h"
+#include "Core/Math/Vector2.h"
 #include "Texture.h"
 
 namespace neko {

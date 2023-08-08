@@ -1,5 +1,6 @@
-#include <sstream>
 #include "Model.h"
+#include <sstream>
+#include "Renderer.h"
 
 namespace neko {
 	bool Model::load(const std::string& filename) {

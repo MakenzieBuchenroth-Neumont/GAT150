@@ -1,9 +1,7 @@
 #pragma once
 #include "Core/Core.h"
-#include "Renderer/Renderer.h"
 
 namespace neko {
-
 	struct ParticleData {
 		vec2 position;
 		vec2 prevPosition;
@@ -23,7 +21,7 @@ namespace neko {
 			m_isActive = true;
 		}
 		void update(float dt);
-		void draw(Renderer& renderer);
+		void draw(class Renderer& renderer);
 
 		friend class ParticleSystem;
 

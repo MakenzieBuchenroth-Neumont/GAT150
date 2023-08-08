@@ -1,5 +1,5 @@
 #include "Time.h"
-#include "MathUtils.h"
+#include "Core/Math/MathUtils.h"
 
 namespace neko {
 

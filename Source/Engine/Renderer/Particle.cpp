@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include "Renderer.h"
 
 namespace neko {
 	void neko::Particle::update(float dt) {

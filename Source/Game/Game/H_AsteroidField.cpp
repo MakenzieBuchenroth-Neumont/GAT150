@@ -1,26 +1,17 @@
 #include "H_AsteroidField.h"
+#include <vector>
+#include <string>
 #include "Player.h"
 #include "Enemy.h"
-#include <string>
 
-#include "Framework/Scene.h"
-#include "Framework/Resource/ResourceManager.h"
-#include "Framework/Components/SpriteComponent.h"
-#include "Framework/Components/EnginePhysicsComponent.h"
-
+#include "Framework/Framework.h"
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
 #include "Renderer/Renderer.h"
-#include "Renderer/Text.h"
-#include "Renderer/ModelManager.h"
-#include "Framework/Emitter.h"
 
-#include "Renderer/ParticleSystem.h"
 #include "Title.h"
-
-#include "Renderer/Highscore.h"
-#include <vector>
 #include "Powerup.h"
+
 
 neko::Highscore highscoreManager;
 std::string asteroid;
