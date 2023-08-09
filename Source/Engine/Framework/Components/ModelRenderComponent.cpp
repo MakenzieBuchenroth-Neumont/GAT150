@@ -1,4 +1,5 @@
 #include "ModelRenderComponent.h"
+#include "Framework/Actor.h"
 
 namespace neko {
 	void ModelRenderComponent::update(float dt) {
@@ -6,7 +7,7 @@ namespace neko {
 	}
 
 	void ModelRenderComponent::draw(Renderer& renderer) {
-		//m_model->draw(renderer, m_owner->m_transform);
+		m_model->draw(renderer, m_owner->m_transform);
 	}
 
 }

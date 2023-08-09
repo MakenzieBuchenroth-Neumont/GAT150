@@ -82,14 +82,14 @@ void H_AsteroidField::update(float dt) {
 		m_scene->removeAll();
 		m_score = 0;
 	{
-			// create player
+		// create player
 		std::unique_ptr<Player> player = std::make_unique<Player>(200.0f, 0, neko::Transform{ {100.0f, 300.0f }, 0, 6});
 		player->m_tag = "Player";
 		player->m_game = this;
 		//create components
 		// sprite
-		std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
-		component->m_texture = neko::g_resourceManager.get<neko::Texture>("falcon.png", neko::g_renderer);
+		std::unique_ptr<neko::ModelRenderComponent> component = std::make_unique<neko::ModelRenderComponent>();
+		component->m_model = neko::g_resourceManager.get<neko::Model>("falcon.txt", neko::g_renderer);
 		player->addComponent(std::move(component));
 		// physics
 		auto physicsComponent = std::make_unique<neko::EnginePhysicsComponent>();
