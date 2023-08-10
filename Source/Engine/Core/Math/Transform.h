@@ -1,6 +1,6 @@
 #pragma once
-#include "Vector2.h"
-#include "Matrix2x2.h"
+#include "Vector3.h"
+#include "Matrix3x3.h"
 
 namespace neko {
 	class Transform {
@@ -17,11 +17,13 @@ namespace neko {
 			scale{ scale} 
 		{}
 
-		mat2 getMatrix() const {
-			mat2 ms = mat2::createScale(scale);
-			mat2 mr = mat2::createRotation(rotation);
+		mat3 getMatrix() const {
+			mat3 ms = mat3::createScale(scale);
+			mat3 mr = mat3::createRotation(rotation);
+			mat3 mt = mat3::createTranslation(position);
+			mat3 mx = mt * ms * mr;
 
-			return ms * mr;
+			return mx;
 		}
 
 	private:

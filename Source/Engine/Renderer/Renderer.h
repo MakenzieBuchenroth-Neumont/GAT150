@@ -33,6 +33,7 @@ namespace neko {
 		int getHeight() const { return m_height; }
 
 		void drawTexture(class Texture* texture, float x, float y, float angle = 0.0f);
+		void drawTexture(class Texture* texture, const Transform transform);
 
 		SDL_Renderer* m_renderer = nullptr;
 

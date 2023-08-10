@@ -83,13 +83,13 @@ void H_AsteroidField::update(float dt) {
 		m_score = 0;
 	{
 		// create player
-		std::unique_ptr<Player> player = std::make_unique<Player>(200.0f, 0, neko::Transform{ {100.0f, 300.0f }, 0, 6});
+		std::unique_ptr<Player> player = std::make_unique<Player>(200.0f, 0, neko::Transform{ {100.0f, 300.0f }, 0, 1});
 		player->m_tag = "Player";
 		player->m_game = this;
 		//create components
 		// sprite
-		std::unique_ptr<neko::ModelRenderComponent> component = std::make_unique<neko::ModelRenderComponent>();
-		component->m_model = neko::g_resourceManager.get<neko::Model>("falcon.txt", neko::g_renderer);
+		std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
+		component->m_texture = neko::g_resourceManager.get<neko::Texture>("falcon.png", neko::g_renderer);
 		player->addComponent(std::move(component));
 		// physics
 		auto physicsComponent = std::make_unique<neko::EnginePhysicsComponent>();
@@ -126,7 +126,7 @@ void H_AsteroidField::update(float dt) {
 				else if (j == 3) {
 					 asteroid = "Asteroid4.png";
 				}
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(800.0f, 0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, neko::halfPi, 5});
+			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(800.0f, 0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, neko::halfPi, 1});
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
 			//create components
@@ -138,7 +138,7 @@ void H_AsteroidField::update(float dt) {
 		}
 		if (m_powerupTimer <= 0) {
 			// create powerup
-			std::unique_ptr<Powerup> powerup = std::make_unique<Powerup>(0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, 0, 5});
+			std::unique_ptr<Powerup> powerup = std::make_unique<Powerup>(0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, 0, 1.5});
 			powerup->m_tag = "Powerup";
 			powerup->m_game = this;
 			// create components

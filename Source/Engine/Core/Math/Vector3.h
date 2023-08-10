@@ -47,7 +47,7 @@ namespace neko {
 	// get the dot product beteen v1 and v2 https://www.falstad.com/dotproduct/
 	inline float Vector3::Dot(const Vector3& v1, const Vector3& v2)
 	{
-		return v1.x * v2.x + v1.y * v2.y; v1.z * v2.z;
+		return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 	}
 
 	using vec3 = Vector3;

@@ -73,7 +73,7 @@
       <Filter>Source\Components</Filter>
     </ClCompile>
     <ClCompile Include="Components\EnginePhysicsComponent.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
