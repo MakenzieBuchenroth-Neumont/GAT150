@@ -8,24 +8,41 @@
 #include "Framework/Components/SpriteComponent.h"
 #include "Framework/Components/ModelRenderComponent.h"
 #include <Framework/Components/PhysicsComponent.h>
+#include "Framework/Components/CollisionComponent.h"
 
+
+bool Player::initialize() {
+	Actor::initialize();
+
+	// cache off
+	m_physicsComponent = getComponent<neko::PhysicsComponent>();
+	auto collisionComponent = getComponent<neko::CollisionComponent>();
+	if (collisionComponent) {
+		auto renderComponent = getComponent<neko::RenderComponent>();
+		if (renderComponent) {
+			float scale = m_transform.scale;
+			collisionComponent->m_radius = renderComponent->getRadius() * scale * 0.7f;;
+		}
+	}
+
+	return false;
+}
 
 void Player::update(float dt) {
 	Actor::update(dt);
 	neko::vec2 forward = neko::vec2{ 0, 0 };
 
-	auto physicsComponent = getComponent<neko::PhysicsComponent>();
-	//physicsComponent->applyForce(forward * m_speed * thrust);
+	//m_physicsComponent->applyForce(forward * m_speed * thrust);
 	
 	if (neko::g_inputSystem.getKeyDown(SDL_SCANCODE_W)) forward += {0, -1};
 	if (neko::g_inputSystem.getKeyDown(SDL_SCANCODE_S)) forward += {0, 1};
 
-	if ((std::fabs(forward.x) + std::fabs(forward.y)) == 2);
+	if ((std::fabs(forward.x) + std::fabs(forward.y)) == 2) {}
 
 	m_transform.position += forward * m_speed * neko::g_time.getDeltaTime();
 
 	if (m_transform.position.y >= neko::g_renderer.getHeight()) {
-		m_transform.position.y = neko::g_renderer.getHeight();
+		m_transform.position.y = (float)neko::g_renderer.getHeight();
 	}
 	if (m_transform.position.y <= 0) {
 		m_transform.position.y = 0;

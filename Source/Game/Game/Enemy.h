@@ -11,6 +11,7 @@ public:
 		m_fireRate = 2.0f;
 		m_fireTimer = m_fireRate;
 	}
+	bool initialize() override;
 	void update(float dt) override;
 	void onCollision(Actor* other) override;
 

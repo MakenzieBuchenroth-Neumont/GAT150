@@ -94,7 +94,12 @@ void H_AsteroidField::update(float dt) {
 		// physics
 		auto physicsComponent = std::make_unique<neko::EnginePhysicsComponent>();
 		player->addComponent(std::move(physicsComponent));
+		// collision
+		auto collisionComponent = std::make_unique<neko::CircleCollisionComponent>();
+		collisionComponent->m_radius = 30.0f;
+		player->addComponent(std::move(collisionComponent));
 
+		player->initialize();
 		m_scene->add(std::move(player));
 	}
 		m_state = eState::Game;
@@ -130,9 +135,16 @@ void H_AsteroidField::update(float dt) {
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
 			//create components
+			// sprite
 			std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
 			component->m_texture = neko::g_resourceManager.get<neko::Texture>(asteroid, neko::g_renderer);
 			enemy->addComponent(std::move(component));
+			// collision
+			auto collisionComponent = std::make_unique<neko::CircleCollisionComponent>();
+			collisionComponent->m_radius = 30.0f;
+			enemy->addComponent(std::move(collisionComponent));
+			
+			enemy->initialize();
 			m_scene->add(std::move(enemy));
 			}
 		}
@@ -142,9 +154,16 @@ void H_AsteroidField::update(float dt) {
 			powerup->m_tag = "Powerup";
 			powerup->m_game = this;
 			// create components
+			// sprite
 			std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
 			component->m_texture = neko::g_resourceManager.get<neko::Texture>("Powerup.png", neko::g_renderer);
 			powerup->addComponent(std::move(component));
+			// collision
+			auto collisionComponent = std::make_unique<neko::CircleCollisionComponent>();
+			collisionComponent->m_radius = 30.0f;
+			powerup->addComponent(std::move(collisionComponent));
+
+			powerup->initialize();
 			m_scene->add(std::move(powerup));
 			m_powerupTimer = 32;
 		}

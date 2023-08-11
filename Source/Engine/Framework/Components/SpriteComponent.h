@@ -8,6 +8,7 @@ namespace neko {
 		void update(float dt) override;
 		void draw(class Renderer& renderer) override;
 
+		virtual float getRadius() { return m_texture->getSize().length() * 0.5f; }
 	public:
 		res_t<Texture> m_texture;
 	};

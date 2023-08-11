@@ -8,6 +8,7 @@ public:
 		m_speed{ speed }
 	{}
 
+	bool initialize() override;
 	void update(float dt) override;
 	void onCollision(Actor* other) override;
 

@@ -2,6 +2,20 @@
 #include "Components/RenderComponent.h"
 
 namespace neko {
+	bool Actor::initialize() {
+		for (auto& component : m_components) {
+			component->initialize();
+		}
+
+		return true;
+	}
+
+	void Actor::onDestroy() {
+		for (auto& component : m_components) {
+			component->onDestroy();
+		}
+	}
+
 	void Actor::update(float dt) {
 		if (m_lifespan != -1.0f) {
 			m_lifespan -= dt;

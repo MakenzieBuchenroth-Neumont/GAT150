@@ -3,16 +3,20 @@
 #include "Core/Core.h"
 #include "Renderer/Model.h"
 #include "Components/Component.h"
+#include "Framework/Object.h"
 
 namespace neko {
-	class Actor {
+	class Actor : public Object {
 	public:
 		Actor() = default;
 		Actor(const neko::Transform& transform) :
 			m_transform{ transform }
 		{}
 
-		void deleteActor(); 
+		virtual bool initialize() override;
+		virtual void onDestroy() override;
+
+		void deleteActor();
 
 		virtual void update(float dt);
 		virtual void draw(neko::Renderer& renderer);

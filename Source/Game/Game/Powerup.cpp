@@ -2,9 +2,22 @@
 #include "Powerup.h"
 #include "Weapon.h"
 #include "H_AsteroidField.h"
-#include "Framework/Scene.h"
+#include "Framework/Framework.h"
 #include "Input/InputSystem.h"
 #include "Player.h"
+
+bool Powerup::initialize()
+{
+	auto collisionComponent = getComponent<neko::CollisionComponent>();
+	if (collisionComponent) {
+		auto renderComponent = getComponent<neko::RenderComponent>();
+		if (renderComponent) {
+			float scale = m_transform.scale;
+			collisionComponent->m_radius = renderComponent->getRadius() * scale;
+		}
+	}
+	return true;
+}
 
 void Powerup::update(float dt) {
 
