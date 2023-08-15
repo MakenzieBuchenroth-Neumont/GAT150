@@ -20,3 +20,5 @@
 
 #include "Framework/Resource/Resource.h"
 #include "Framework/Resource/ResourceManager.h"
+
+#include "Framework/Factory.h"

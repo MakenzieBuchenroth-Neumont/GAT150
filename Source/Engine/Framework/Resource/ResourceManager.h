@@ -2,11 +2,14 @@
 #include <map>
 #include <memory>
 #include <string>
-
+#include "Framework/Singleton.h"
 #include "Resource.h"
 
+
+#define GET_RESOURCE(type, filename, ...) neko::ResourceManager::Instance().get<type>(filename, __VA_ARGS__)
+
 namespace neko {
-	class ResourceManager {
+	class ResourceManager : public Singleton<ResourceManager> {
 	public:
 		template<typename T, typename ... TArgs>
 		res_t<T> get(const std::string& filename, TArgs ... args);
@@ -27,7 +30,4 @@ namespace neko {
 
 		return resource;
 	}
-
-	extern ResourceManager g_resourceManager;
-
 }

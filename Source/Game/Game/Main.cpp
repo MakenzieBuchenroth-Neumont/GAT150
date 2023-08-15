@@ -20,6 +20,9 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
+	neko::Factory::Instance().reg<neko::SpriteComponent>("SpriteComponent");
+
+
 	// pre setup
 	INFO_LOG("Initialized Engine...");
 

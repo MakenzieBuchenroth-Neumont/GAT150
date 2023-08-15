@@ -22,18 +22,18 @@ bool H_AsteroidField::initialize() {
 
 	// create font
 
-	m_scoreText = std::make_unique<neko::Text>(neko::g_resourceManager.get<neko::Font>("font.ttf", 28));
+	m_scoreText = std::make_unique<neko::Text>(GET_RESOURCE(neko::Font, "font.ttf", 28));
 	m_scoreText->create(neko::g_renderer, "SCORE 000000", neko::Color(1, 1, 1, 1));
 
-	m_highScoreText = std::make_unique<neko::Text>(neko::g_resourceManager.get<neko::Font>("font.ttf", 28));
+	m_highScoreText = std::make_unique<neko::Text>(GET_RESOURCE(neko::Font, "font.ttf", 28));
 	
-	m_titleText = std::make_unique<neko::Text>(neko::g_resourceManager.get<neko::Font>("font.ttf", 28));
+	m_titleText = std::make_unique<neko::Text>(GET_RESOURCE(neko::Font, "font.ttf", 28));
 	m_titleText->create(neko::g_renderer, "HOTH ASTEROID FIELD", neko::Color(1, 1, 1, 1));
 
-	m_subTitleText = std::make_unique<neko::Text>(neko::g_resourceManager.get<neko::Font>("font.ttf", 28));
+	m_subTitleText = std::make_unique<neko::Text>(GET_RESOURCE(neko::Font, "font.ttf", 28));
 	m_subTitleText->create(neko::g_renderer, "PRESS SPACE TO PLAY", neko::Color(1, 1, 1, 1));
 
-	m_endText = std::make_unique<neko::Text>(neko::g_resourceManager.get<neko::Font>("font.ttf", 28));
+	m_endText = std::make_unique<neko::Text>(GET_RESOURCE(neko::Font, "font.ttf", 28));
 	m_endText->create(neko::g_renderer, "YOU GOT CAUGHT! PRESS SPACE TO PLAY AGAIN", neko::Color(1, 1, 1, 1));
 
 	// create audio
@@ -88,9 +88,9 @@ void H_AsteroidField::update(float dt) {
 		player->m_game = this;
 		//create components
 		// sprite
-		std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
-		component->m_texture = neko::g_resourceManager.get<neko::Texture>("falcon.png", neko::g_renderer);
-		player->addComponent(std::move(component));
+		auto renderComponent = neko::Factory::Instance().create<neko::SpriteComponent>("SpriteComponent"); //std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
+		renderComponent->m_texture = GET_RESOURCE(neko::Texture, "falcon.png", neko::g_renderer);
+		player->addComponent(std::move(renderComponent));
 		// physics
 		auto physicsComponent = std::make_unique<neko::EnginePhysicsComponent>();
 		player->addComponent(std::move(physicsComponent));
@@ -137,7 +137,7 @@ void H_AsteroidField::update(float dt) {
 			//create components
 			// sprite
 			std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
-			component->m_texture = neko::g_resourceManager.get<neko::Texture>(asteroid, neko::g_renderer);
+			component->m_texture = GET_RESOURCE(neko::Texture, asteroid, neko::g_renderer);
 			enemy->addComponent(std::move(component));
 			// collision
 			auto collisionComponent = std::make_unique<neko::CircleCollisionComponent>();
@@ -156,7 +156,7 @@ void H_AsteroidField::update(float dt) {
 			// create components
 			// sprite
 			std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
-			component->m_texture = neko::g_resourceManager.get<neko::Texture>("Powerup.png", neko::g_renderer);
+			component->m_texture = GET_RESOURCE(neko::Texture, "Powerup.png", neko::g_renderer);
 			powerup->addComponent(std::move(component));
 			// collision
 			auto collisionComponent = std::make_unique<neko::CircleCollisionComponent>();
