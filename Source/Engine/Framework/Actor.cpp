@@ -2,6 +2,8 @@
 #include "Components/RenderComponent.h"
 
 namespace neko {
+	CLASS_DEFINITION(Actor)
+
 	bool Actor::initialize() {
 		for (auto& component : m_components) {
 			component->initialize();
@@ -43,5 +45,9 @@ namespace neko {
 
 	void Actor::deleteActor() {
 		delete this;
+	}
+
+	bool Actor::read(const rapidjson::Value& value) {
+		return true;
 	}
 }

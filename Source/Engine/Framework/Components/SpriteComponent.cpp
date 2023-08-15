@@ -3,6 +3,8 @@
 #include "Framework/Actor.h"
 
 namespace neko {
+	CLASS_DEFINITION(SpriteComponent)
+
 	void SpriteComponent::update(float dt) {
 
 	}

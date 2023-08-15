@@ -20,9 +20,6 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	neko::Factory::Instance().reg<neko::SpriteComponent>("SpriteComponent");
-
-
 	// pre setup
 	INFO_LOG("Initialized Engine...");
 
@@ -33,33 +30,33 @@ int main(int argc, char* argv[]) {
 	neko::seedRandom((unsigned int)time(nullptr));
 	neko::setFilePath("Assets");
 
-	// load json file
-	rapidjson::Document document;
-	neko::Json::load("json.txt", document);
+	//// load json file
+	//rapidjson::Document document;
+	//neko::Json::load("json.txt", document);
 
-	int i1;
-	neko::Json::read(document, "integer1", i1);
-	std::cout << i1 << std::endl;
+	//int i1;
+	//neko::Json::read(document, "integer1", i1);
+	//std::cout << i1 << std::endl;
 
-	int i2;
-	neko::Json::read(document, "integer2", i2);
-	std::cout << i2 << std::endl;
+	//int i2;
+	//neko::Json::read(document, "integer2", i2);
+	//std::cout << i2 << std::endl;
 
-	std::string str;
-	neko::Json::read(document, "string", str);
-	std::cout << str << std::endl;
+	//std::string str;
+	//neko::Json::read(document, "string", str);
+	//std::cout << str << std::endl;
 
-	bool b;
-	neko::Json::read(document, "boolean", b);
-	std::cout << b << std::endl;
+	//bool b;
+	//neko::Json::read(document, "boolean", b);
+	//std::cout << b << std::endl;
 
-	float f;
-	neko::Json::read(document, "float", f);
-	std::cout << f << std::endl;
+	//float f;
+	//neko::Json::read(document, "float", f);
+	//std::cout << f << std::endl;
 
-	neko::vec2 v2;
-	neko::Json::read(document, "vector2", v2);
-	std::cout << v2 << std::endl;
+	//neko::vec2 v2;
+	//neko::Json::read(document, "vector2", v2);
+	//std::cout << v2 << std::endl;
 
 	// create the game window
 	neko::g_renderer.initialize();

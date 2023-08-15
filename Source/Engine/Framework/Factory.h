@@ -1,8 +1,11 @@
 #pragma once
 #include "Singleton.h"
+#include "Core/Logger.h"
 #include <string>
 #include <memory>
 #include <map>
+
+#define CREATE_CLASS(classname) neko::Factory::Instance().create<neko::classname>(#classname);
 
 namespace neko {
 	class CreatorBase {
@@ -28,6 +31,11 @@ namespace neko {
 		template <typename T>
 		std::unique_ptr<T> create(const std::string& key);
 
+		friend class Singleton;
+
+	protected:
+		Factory() = default;
+
 	private:
 		std::map<std::string, std::unique_ptr<CreatorBase>> m_registry;
 
@@ -35,6 +43,7 @@ namespace neko {
 
 	template<typename T>
 	inline void Factory::reg(const std::string& key) {
+		INFO_LOG("Class registered: " << key);
 		m_registry[key] = std::make_unique<Creator<T>>();
 	}
 

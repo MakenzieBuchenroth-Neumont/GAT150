@@ -88,14 +88,14 @@ void H_AsteroidField::update(float dt) {
 		player->m_game = this;
 		//create components
 		// sprite
-		auto renderComponent = neko::Factory::Instance().create<neko::SpriteComponent>("SpriteComponent"); //std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
+		auto renderComponent = CREATE_CLASS(SpriteComponent)
 		renderComponent->m_texture = GET_RESOURCE(neko::Texture, "falcon.png", neko::g_renderer);
 		player->addComponent(std::move(renderComponent));
 		// physics
-		auto physicsComponent = std::make_unique<neko::EnginePhysicsComponent>();
+		auto physicsComponent = CREATE_CLASS(EnginePhysicsComponent)
 		player->addComponent(std::move(physicsComponent));
 		// collision
-		auto collisionComponent = std::make_unique<neko::CircleCollisionComponent>();
+		auto collisionComponent = CREATE_CLASS(CircleCollisionComponent)
 		collisionComponent->m_radius = 30.0f;
 		player->addComponent(std::move(collisionComponent));
 
@@ -136,11 +136,11 @@ void H_AsteroidField::update(float dt) {
 			enemy->m_game = this;
 			//create components
 			// sprite
-			std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
-			component->m_texture = GET_RESOURCE(neko::Texture, asteroid, neko::g_renderer);
-			enemy->addComponent(std::move(component));
+			auto spriteComponent = CREATE_CLASS(SpriteComponent)
+			spriteComponent->m_texture = GET_RESOURCE(neko::Texture, asteroid, neko::g_renderer);
+			enemy->addComponent(std::move(spriteComponent));
 			// collision
-			auto collisionComponent = std::make_unique<neko::CircleCollisionComponent>();
+			auto collisionComponent = CREATE_CLASS(CircleCollisionComponent)
 			collisionComponent->m_radius = 30.0f;
 			enemy->addComponent(std::move(collisionComponent));
 			
@@ -155,11 +155,11 @@ void H_AsteroidField::update(float dt) {
 			powerup->m_game = this;
 			// create components
 			// sprite
-			std::unique_ptr<neko::SpriteComponent> component = std::make_unique<neko::SpriteComponent>();
-			component->m_texture = GET_RESOURCE(neko::Texture, "Powerup.png", neko::g_renderer);
-			powerup->addComponent(std::move(component));
+			auto spriteComponent = CREATE_CLASS(SpriteComponent)
+			spriteComponent->m_texture = GET_RESOURCE(neko::Texture, "Powerup.png", neko::g_renderer);
+			powerup->addComponent(std::move(spriteComponent));
 			// collision
-			auto collisionComponent = std::make_unique<neko::CircleCollisionComponent>();
+			auto collisionComponent = CREATE_CLASS(CircleCollisionComponent)
 			collisionComponent->m_radius = 30.0f;
 			powerup->addComponent(std::move(collisionComponent));
 

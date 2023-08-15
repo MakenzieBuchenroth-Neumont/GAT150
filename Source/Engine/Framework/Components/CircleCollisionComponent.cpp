@@ -2,6 +2,8 @@
 #include "Framework/Actor.h"
 
 namespace neko {
+    CLASS_DEFINITION(CircleCollisionComponent)
+
     void CircleCollisionComponent::update(float dt) {
 
     }

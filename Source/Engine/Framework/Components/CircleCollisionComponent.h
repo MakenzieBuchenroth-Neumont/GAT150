@@ -4,7 +4,7 @@
 namespace neko {
 	class CircleCollisionComponent : public CollisionComponent {
 	public:
-
+		CLASS_DECLARATION(CircleCollisionComponent)
 
 		// Inherited via CollisionComponent
 		virtual void update(float dt) override;
