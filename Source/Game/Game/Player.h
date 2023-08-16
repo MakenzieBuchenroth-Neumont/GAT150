@@ -6,7 +6,7 @@ class Player : public neko::Actor {
 public:
 	Player(float speed, float turnRate, const neko::Transform& transform) :
 		neko::Actor{ transform },
-		m_speed{ speed },
+		speed{ speed },
 		m_turnRate{ turnRate }
 	{}
 
@@ -15,7 +15,7 @@ public:
 	void onCollision(Actor* other) override;
 
 private:
-	float m_speed = 0;
+	float speed = 0;
 	float m_turnRate = 0;
 	float m_health = 100;
 	bool dead = false;

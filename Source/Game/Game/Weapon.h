@@ -6,7 +6,7 @@ public:
 	Weapon(float speed, const neko::Transform& transform) :
 		neko::Actor{ transform },
 		m_speed{ speed }
-	{ m_lifespan = 2.0f; }
+	{ lifespan = 2.0f; }
 	void update(float dt) override;
 	void onCollision(Actor* other) override;
 

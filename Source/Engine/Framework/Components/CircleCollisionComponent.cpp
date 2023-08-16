@@ -9,7 +9,7 @@ namespace neko {
     }
 
     bool CircleCollisionComponent::checkCollision(CollisionComponent* collision) {
-        float distance = m_owner->m_transform.position.distance(collision->m_owner->m_transform.position);
+        float distance = m_owner->transform.position.distance(collision->m_owner->transform.position);
         float radius = m_radius + collision->m_radius;
 
         return (distance <= radius);

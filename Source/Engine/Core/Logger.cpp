@@ -3,8 +3,6 @@
 #include "FileIO.h"
 
 namespace neko {
-	
-	Logger g_logger(LogLevel::Info, &std::cout, "log.txt");
 
 	bool Logger::log(LogLevel logLevel, const std::string filename, int line) {
 		if (logLevel < m_logLevel) return false;

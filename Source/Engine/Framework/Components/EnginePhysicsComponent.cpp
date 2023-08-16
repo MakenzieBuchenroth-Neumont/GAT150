@@ -5,7 +5,7 @@ namespace neko {
 	CLASS_DEFINITION(EnginePhysicsComponent)
 
 	void EnginePhysicsComponent::update(float dt) {
-		m_owner->m_transform.position += m_velocity * dt;
+		m_owner->transform.position += m_velocity * dt;
 		m_velocity = std::pow(1 - m_damping, dt);
 	}
 

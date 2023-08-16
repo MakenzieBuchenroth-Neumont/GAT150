@@ -6,6 +6,7 @@
 #include <map>
 
 #define CREATE_CLASS(classname) neko::Factory::Instance().create<neko::classname>(#classname);
+#define CREATE_CLASS_BASE(classbase, classname) neko::Factory::Instance().create<neko::classbase>(#classname);
 
 namespace neko {
 	class CreatorBase {

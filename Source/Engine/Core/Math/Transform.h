@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector3.h"
 #include "Matrix3x3.h"
+#include "Core/Json.h"
 
 namespace neko {
 	class Transform {
@@ -26,6 +27,7 @@ namespace neko {
 			return mx;
 		}
 
-	private:
+		void read(const json_t& value);
+
 	};
 }

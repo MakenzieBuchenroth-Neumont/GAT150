@@ -20,7 +20,7 @@ bool Player::initialize() {
 	if (collisionComponent) {
 		auto renderComponent = getComponent<neko::RenderComponent>();
 		if (renderComponent) {
-			float scale = m_transform.scale;
+			float scale = transform.scale;
 			collisionComponent->m_radius = renderComponent->getRadius() * scale * 0.7f;;
 		}
 	}
@@ -39,19 +39,19 @@ void Player::update(float dt) {
 
 	if ((std::fabs(forward.x) + std::fabs(forward.y)) == 2) {}
 
-	m_transform.position += forward * m_speed * neko::g_time.getDeltaTime();
+	transform.position += forward * speed * neko::g_time.getDeltaTime();
 
-	if (m_transform.position.y >= neko::g_renderer.getHeight()) {
-		m_transform.position.y = (float)neko::g_renderer.getHeight();
+	if (transform.position.y >= neko::g_renderer.getHeight()) {
+		transform.position.y = (float)neko::g_renderer.getHeight();
 	}
-	if (m_transform.position.y <= 0) {
-		m_transform.position.y = 0;
+	if (transform.position.y <= 0) {
+		transform.position.y = 0;
 	}
 
 }
 
 void Player::onCollision(Actor* other) {
-	if (other->m_tag == "Enemy") {
+	if (other->tag == "Enemy") {
 	// particle system variables
 	if (!dead) {
 		neko::EmitterData data;
@@ -68,19 +68,19 @@ void Player::onCollision(Actor* other) {
 
 		data.color = neko::Color{ 1, 1, 1, 1 };
 
-		neko::Transform transform{ { m_transform.position }, 0, 1 };
+		neko::Transform transform{ { transform.position }, 0, 1 };
 		auto emitter = std::make_unique<neko::Emitter>(transform, data);
-		emitter->m_lifespan = 1.0f;
+		emitter->lifespan = 1.0f;
 		m_game->m_scene->add(std::move(emitter));
 		dead = true;
 	}
 
 	dynamic_cast<H_AsteroidField*>(m_game)->setState(H_AsteroidField::eState::PlayerDeadStart);
-	m_destroyed = true;
+	destroyed = true;
 
 	}
-	if (other->m_tag == "Powerup") {
+	if (other->tag == "Powerup") {
 		dynamic_cast<H_AsteroidField*>(m_game)->m_powerup = true;
-		other->m_destroyed = true;
+		other->destroyed = true;
 	}
 }

@@ -11,7 +11,7 @@ namespace neko {
 		CLASS_DECLARATION(Actor)
 		Actor() = default;
 		Actor(const neko::Transform& transform) :
-			m_transform{ transform }
+			transform{ transform }
 		{}
 
 		virtual bool initialize() override;
@@ -34,19 +34,19 @@ namespace neko {
 
 		class Game* m_game = nullptr;
 
-		Transform m_transform;
-		std::string m_tag;
-
-		float m_lifespan = -1.0f;
-		bool m_destroyed = false;
+	public:
+		Transform transform;
+		std::string tag;
+		float lifespan = -1.0f;
+		bool destroyed = false;
 
 	protected:
-		std::vector<std::unique_ptr<Component>> m_components;
+		std::vector<std::unique_ptr<Component>> components;
 	};
 
 	template<typename T>
 	inline T* Actor::getComponent() {
-		for (auto& component : m_components) {
+		for (auto& component : components) {
 			T* result = dynamic_cast<T*>(component.get());
 			if (result) return result;
 		}

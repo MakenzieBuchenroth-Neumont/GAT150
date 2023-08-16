@@ -3,8 +3,10 @@
 #include <string>
 #include "Math/Vector2.h"
 
-#define READ_DATA(value, data) neko::Json::read(value, #data, data);
-#define READ_DATA_REQUIRED(value, data) neko::Json::read(value, #data, data, true);
+#define READ_DATA(value, data) neko::Json::read(value, #data, data)
+#define READ_DATA_REQUIRED(value, data) neko::Json::read(value, #data, data, true)
+#define HAS_DATA(value, data) value.HasMember(#data)
+#define GET_DATA(value, data) value[#data]
 
 namespace neko {
 	class Json {
@@ -16,4 +18,6 @@ namespace neko {
 		static bool read(const rapidjson::Value& value, const std::string& name, std::string& data, bool required = false);
 		static bool read(const rapidjson::Value& value, const std::string& name, vec2& data, bool required = false);
 	};
+
+	using json_t = rapidjson::Value;
 }

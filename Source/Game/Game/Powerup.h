@@ -5,15 +5,15 @@ class Powerup : public neko::Actor {
 public:
 	Powerup(float speed, const neko::Transform& transform) :
 		neko::Actor{ transform },
-		m_speed{ speed }
+		speed{ speed }
 	{}
 
 	bool initialize() override;
 	void update(float dt) override;
 	void onCollision(Actor* other) override;
 
-	bool m_destroyed = false;
+	bool destroyed = false;
 
 private:
-	float m_speed = 0;
+	float speed = 0;
 };

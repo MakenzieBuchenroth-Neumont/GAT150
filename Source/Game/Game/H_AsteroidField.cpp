@@ -84,7 +84,7 @@ void H_AsteroidField::update(float dt) {
 	{
 		// create player
 		std::unique_ptr<Player> player = std::make_unique<Player>(200.0f, 0, neko::Transform{ {100.0f, 300.0f }, 0, 1});
-		player->m_tag = "Player";
+		player->tag = "Player";
 		player->m_game = this;
 		//create components
 		// sprite
@@ -131,8 +131,8 @@ void H_AsteroidField::update(float dt) {
 				else if (j == 3) {
 					 asteroid = "Asteroid4.png";
 				}
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(800.0f, 0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, neko::halfPi, 1});
-			enemy->m_tag = "Enemy";
+			std::unique_ptr<EnemyComponent> enemy = std::make_unique<EnemyComponent>(800.0f, 0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, neko::halfPi, 1});
+			enemy->tag = "Enemy";
 			enemy->m_game = this;
 			//create components
 			// sprite
@@ -151,7 +151,7 @@ void H_AsteroidField::update(float dt) {
 		if (m_powerupTimer <= 0) {
 			// create powerup
 			std::unique_ptr<Powerup> powerup = std::make_unique<Powerup>(0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, 0, 1.5});
-			powerup->m_tag = "Powerup";
+			powerup->tag = "Powerup";
 			powerup->m_game = this;
 			// create components
 			// sprite
@@ -205,7 +205,7 @@ void H_AsteroidField::update(float dt) {
 		m_scene->removeAll();
 
 		std::unique_ptr<Title> title = std::make_unique<Title>(neko::Transform{ { 400.0f, 250.0f }, neko::halfPi, 6});//, add sprite);
-		title->m_tag = "Title";
+		title->tag = "Title";
 		title->m_game = this;
 		m_scene->add(std::move(title));
 		if (neko::g_inputSystem.getKeyDown(SDL_SCANCODE_SPACE)) {

@@ -5,7 +5,7 @@ namespace neko {
 	CLASS_DEFINITION(Actor)
 
 	bool Actor::initialize() {
-		for (auto& component : m_components) {
+		for (auto& component : components) {
 			component->initialize();
 		}
 
@@ -13,25 +13,25 @@ namespace neko {
 	}
 
 	void Actor::onDestroy() {
-		for (auto& component : m_components) {
+		for (auto& component : components) {
 			component->onDestroy();
 		}
 	}
 
 	void Actor::update(float dt) {
-		if (m_lifespan != -1.0f) {
-			m_lifespan -= dt;
-			m_destroyed = (m_lifespan <= 0);
+		if (lifespan != -1.0f) {
+			lifespan -= dt;
+			destroyed = (lifespan <= 0);
 		}
 
-		for (auto& component : m_components) {
+		for (auto& component : components) {
 			component->update(dt);
 		}
 
 	}
 
 	void Actor::draw(neko::Renderer& renderer) {
-		for (auto& component : m_components) {
+		for (auto& component : components) {
 			if (dynamic_cast<RenderComponent*>(component.get())) {
 				dynamic_cast<RenderComponent*>(component.get())->draw(renderer);
 			}
@@ -40,14 +40,28 @@ namespace neko {
 
 	void Actor::addComponent(std::unique_ptr<Component> component) {
 		component->m_owner = this;
-		m_components.push_back(std::move(component));
+		components.push_back(std::move(component));
 	}
 
 	void Actor::deleteActor() {
 		delete this;
 	}
 
-	bool Actor::read(const rapidjson::Value& value) {
-		return true;
+	void Actor::read(const json_t& value) {
+		Object::read(value);
+		READ_DATA(value, tag);
+		READ_DATA(value, lifespan);
+		if (HAS_DATA(value, transform)) transform.read(value);
+
+		if (HAS_DATA(value, components) && GET_DATA(value, components).IsArray()) {
+			for (auto& componentValue : GET_DATA(value, components).GetArray()) {
+				std::string type;
+				READ_DATA(componentValue, type);
+
+				auto component = CREATE_CLASS_BASE(Component, type);
+				component->read(componentValue);
+				addComponent(std::move(component));
+			}
+		}
 	}
 }

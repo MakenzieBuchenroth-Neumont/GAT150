@@ -12,7 +12,7 @@ bool Powerup::initialize()
 	if (collisionComponent) {
 		auto renderComponent = getComponent<neko::RenderComponent>();
 		if (renderComponent) {
-			float scale = m_transform.scale;
+			float scale = transform.scale;
 			collisionComponent->m_radius = renderComponent->getRadius() * scale;
 		}
 	}
@@ -24,8 +24,8 @@ void Powerup::update(float dt) {
 	Actor::update(dt);
 
 	neko::vec2 forward = neko::vec2{ -1, 0 };
-	m_speed = 75;
-	m_transform.position += forward * m_speed * neko::g_time.getDeltaTime();
+	speed = 75;
+	transform.position += forward * speed * neko::g_time.getDeltaTime();
 }
 
 void Powerup::onCollision(Actor* other) {
