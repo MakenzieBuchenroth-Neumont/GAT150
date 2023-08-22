@@ -144,6 +144,7 @@
     <ClInclude Include="Components\PhysicsComponent.h" />
     <ClInclude Include="Components\RenderComponent.h" />
     <ClInclude Include="Components\SpriteComponent.h" />
+    <ClInclude Include="Components\TextRenderComponent.h" />
     <ClInclude Include="Emitter.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="Framework.h" />
@@ -160,9 +161,13 @@
     <ClCompile Include="Components\EnginePhysicsComponent.cpp" />
     <ClCompile Include="Components\ModelRenderComponent.cpp" />
     <ClCompile Include="Components\SpriteComponent.cpp" />
+    <ClCompile Include="Components\TextRenderComponent.cpp" />
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Scene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Build\Assets\scene.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -11,6 +11,9 @@
     <Filter Include="Source\Components">
       <UniqueIdentifier>{15514c84-1a86-40c7-9f4f-20eb3c84ce88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{dfa50185-144a-40f2-b7a4-013161d7f787}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -67,6 +70,9 @@
     <ClInclude Include="Factory.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Components\TextRenderComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
@@ -93,5 +99,13 @@
     <ClCompile Include="Object.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Components\TextRenderComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Build\Assets\scene.json">
+      <Filter>Resources</Filter>
+    </None>
   </ItemGroup>
 </Project>

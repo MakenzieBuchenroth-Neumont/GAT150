@@ -14,4 +14,8 @@ namespace neko {
 
         return (distance <= radius);
     }
+
+    void CircleCollisionComponent::read(const json_t& value) {
+        //
+    }
 }

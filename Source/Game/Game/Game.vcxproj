@@ -167,7 +167,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EnemyComponent.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="H_AsteroidField.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -188,12 +188,15 @@
     <ProjectReference Include="..\..\Engine\Input\Input.vcxproj">
       <Project>{c2d0d376-ece9-4a4f-b94b-572ade91b990}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\Engine\Physics\Physics.vcxproj">
+      <Project>{eb84dbb1-5c26-45ea-8692-b3bc3047b6d9}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Engine\Renderer\Renderer.vcxproj">
       <Project>{5c4c110b-ad05-4858-beda-1ba780df973b}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EnemyComponent.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="H_AsteroidField.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Powerup.h" />

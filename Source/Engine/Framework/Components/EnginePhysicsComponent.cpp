@@ -12,5 +12,9 @@ namespace neko {
 	void EnginePhysicsComponent::applyForce(const vec2& force) {
 		m_velocity += force;
 	}
+
+	void EnginePhysicsComponent::read(const json_t& value) {
+		//
+	}
 }
 

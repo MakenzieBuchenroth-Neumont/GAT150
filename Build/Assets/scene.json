@@ -1,0 +1,194 @@
+{
+	"actors": [
+		{
+			"type": "Actor",
+			"name": "Background",
+			"persistent": true,
+			"transform": {
+				"position": [ 400, 300 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "stars.png"
+				}
+			]
+		},
+		{
+			"type": "Enemy",
+			"name": "Enemy",
+			"prototype": true,
+			"tag": "Enemy",
+			"transform": {
+				"position": [ 800, 300 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"speed": 200,
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "Asteroid1.png"
+				},
+				{
+					"type": "CircleCollisionComponent"
+				}
+			]
+		},
+		{
+			"type": "Player",
+			"name": "Player",
+			"prototype": true,
+			"tag": "Player",
+			"transform": {
+				"position": [ 100, 300 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"speed": 200,
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "falcon.png"
+				},
+				{
+					"type": "CircleCollisionComponent"
+				}
+			]
+		},
+		{
+			"type": "Powerup",
+			"name": "Powerup",
+			"prototype": true,
+			"tag": "Powerup",
+			"transform": {
+				"position": [ 800, 300 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"speed": 200,
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "Powerup.png"
+				},
+				{
+					"type": "CircleCollisionComponent"
+				}
+			]
+		},
+		{
+			"type": "Title",
+			"name": "Title",
+			"prototype": true,
+			"tag": "Title",
+			"transform": {
+				"position": [ 400, 200 ],
+				"scale": 0.5,
+				"rotation": 0
+			},
+			"speed": 200,
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "empire.png"
+				},
+				{
+					"type": "CircleCollisionComponent"
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Start",
+			"persistent": true,
+			"transform": {
+				"position": [ 393, 250 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "font.ttf",
+					"fontSize": 28,
+					"text": "HOTH ASTEROID FIELD"
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Subtitle",
+			"persistent": true,
+			"transform": {
+				"position": [ 393, 275 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "font.ttf",
+					"fontSize": 28,
+					"text": "PRESS SPACE TO START"
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "End",
+			"persistent": true,
+			"transform": {
+				"position": [ 393, 300 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "font.ttf",
+					"fontSize": 28,
+					"text": "YOU GOT CAUGHT! PRESS SPACE TO PLAY AGAIN"
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Score",
+			"persistent": true,
+			"transform": {
+				"position": [ 25, 10 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "font.ttf",
+					"fontSize": 28,
+					"text": "0"
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "High",
+			"persistent": true,
+			"transform": {
+				"position": [ 650, 10 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "font.ttf",
+					"fontSize": 28,
+					"text": "HIGH SCORE 000000"
+				}
+			]
+		}
+	]
+}

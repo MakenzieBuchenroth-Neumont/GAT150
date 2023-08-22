@@ -4,6 +4,20 @@
 namespace neko {
 	CLASS_DEFINITION(Actor)
 
+		Actor::Actor(const Actor& other) {
+		name = other.name;
+		tag = other.tag;
+		lifespan = other.lifespan;
+		transform = other.transform;
+		m_scene = other.m_scene;
+		m_game = other.m_game;
+
+		for (auto& component : other.components) {
+			auto cloneComponent = std::unique_ptr<Component>(dynamic_cast<Component*>(component->clone().release()));
+			addComponent(std::move(cloneComponent));
+		}
+	}
+
 	bool Actor::initialize() {
 		for (auto& component : components) {
 			component->initialize();
@@ -51,7 +65,9 @@ namespace neko {
 		Object::read(value);
 		READ_DATA(value, tag);
 		READ_DATA(value, lifespan);
-		if (HAS_DATA(value, transform)) transform.read(value);
+		READ_DATA(value, persistent);
+		READ_DATA(value, prototype);
+		if (HAS_DATA(value, transform)) transform.read(GET_DATA(value, transform));
 
 		if (HAS_DATA(value, components) && GET_DATA(value, components).IsArray()) {
 			for (auto& componentValue : GET_DATA(value, components).GetArray()) {

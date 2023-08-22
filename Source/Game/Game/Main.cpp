@@ -10,6 +10,7 @@
 #include "Renderer/Renderer.h"
 #include "Input/InputSystem.h"
 #include "Audio/AudioSystem.h"
+#include "Physics/PhysicsSystem.h"
 
 #include "Player.h"
 #include "Enemy.h"
@@ -23,40 +24,13 @@ int main(int argc, char* argv[]) {
 	// pre setup
 	INFO_LOG("Initialized Engine...");
 
+	neko::PhysicsSystem::Instance().initialize();
 
 	// initialize memory tracker, set random seed and set file path
 	neko::MemoryTracker::initialize();
 	INFO_LOG("Initialized Memory...");
 	neko::seedRandom((unsigned int)time(nullptr));
 	neko::setFilePath("Assets");
-
-	//// load json file
-	//rapidjson::Document document;
-	//neko::Json::load("json.txt", document);
-
-	//int i1;
-	//neko::Json::read(document, "integer1", i1);
-	//std::cout << i1 << std::endl;
-
-	//int i2;
-	//neko::Json::read(document, "integer2", i2);
-	//std::cout << i2 << std::endl;
-
-	//std::string str;
-	//neko::Json::read(document, "string", str);
-	//std::cout << str << std::endl;
-
-	//bool b;
-	//neko::Json::read(document, "boolean", b);
-	//std::cout << b << std::endl;
-
-	//float f;
-	//neko::Json::read(document, "float", f);
-	//std::cout << f << std::endl;
-
-	//neko::vec2 v2;
-	//neko::Json::read(document, "vector2", v2);
-	//std::cout << v2 << std::endl;
 
 	// create the game window
 	neko::g_renderer.initialize();
@@ -67,9 +41,6 @@ int main(int argc, char* argv[]) {
 	unique_ptr<H_AsteroidField> game = make_unique<H_AsteroidField>();
 	game->initialize();
 	INFO_LOG("Initialized Game...");
-
-	shared_ptr<neko::Texture> texture = make_shared<neko::Texture>();
-	texture->create("stars.png", neko::g_renderer);
 
 	// main game loop
 	bool quit = false;
@@ -95,8 +66,6 @@ int main(int argc, char* argv[]) {
 		// draw game
 		neko::g_renderer.setColor(0, 0, 0, 255);
 		neko::g_renderer.beginFrame();
-		// add background image
-		neko::g_renderer.drawTexture(texture.get(), 400.0f, 300.0f, 0.0f);
 		game->draw(neko::g_renderer);
 		neko::g_renderer.endFrame();
 

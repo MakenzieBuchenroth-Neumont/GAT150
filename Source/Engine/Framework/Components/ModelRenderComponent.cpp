@@ -6,7 +6,7 @@ namespace neko {
 	CLASS_DEFINITION(ModelRenderComponent)
 
 	bool ModelRenderComponent::initialize() {
-		m_model = GET_RESOURCE(Model, modelName);
+		if (!modelName.empty()) m_model = GET_RESOURCE(Model, modelName);
 
 		return true;
 	}

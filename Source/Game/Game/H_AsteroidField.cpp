@@ -20,22 +20,6 @@ bool H_AsteroidField::initialize() {
 	// initialize the input system
 	neko::g_inputSystem.initialize();
 
-	// create font
-
-	m_scoreText = std::make_unique<neko::Text>(GET_RESOURCE(neko::Font, "font.ttf", 28));
-	m_scoreText->create(neko::g_renderer, "SCORE 000000", neko::Color(1, 1, 1, 1));
-
-	m_highScoreText = std::make_unique<neko::Text>(GET_RESOURCE(neko::Font, "font.ttf", 28));
-	
-	m_titleText = std::make_unique<neko::Text>(GET_RESOURCE(neko::Font, "font.ttf", 28));
-	m_titleText->create(neko::g_renderer, "HOTH ASTEROID FIELD", neko::Color(1, 1, 1, 1));
-
-	m_subTitleText = std::make_unique<neko::Text>(GET_RESOURCE(neko::Font, "font.ttf", 28));
-	m_subTitleText->create(neko::g_renderer, "PRESS SPACE TO PLAY", neko::Color(1, 1, 1, 1));
-
-	m_endText = std::make_unique<neko::Text>(GET_RESOURCE(neko::Font, "font.ttf", 28));
-	m_endText->create(neko::g_renderer, "YOU GOT CAUGHT! PRESS SPACE TO PLAY AGAIN", neko::Color(1, 1, 1, 1));
-
 	// create audio
 	neko::g_audioSystem.initialize();
 	neko::g_audioSystem.addAudio("bgm", "bgm.wav");
@@ -50,6 +34,8 @@ bool H_AsteroidField::initialize() {
 	}
 
 	m_scene = std::make_unique<neko::Scene>();
+	m_scene->load("scene.json");
+	m_scene->initialize();
 
 	return true;
 }
@@ -59,17 +45,21 @@ void H_AsteroidField::shutdown() {
 
 void H_AsteroidField::update(float dt) {
 	int highScore = highscoreManager.readHighScore();
-	m_highScoreText->create(neko::g_renderer, "HIGH SCORE " + std::to_string(highscoreManager.readHighScore()), neko::Color(1, 1, 1, 1));
+	m_scene->getActorByName("High")->getComponent<neko::TextRenderComponent>()->setText("HIGH SCORE " + std::to_string(highscoreManager.readHighScore()));
+	//m_highScoreText->create(neko::g_renderer, "HIGH SCORE " + std::to_string(highscoreManager.readHighScore()), neko::Color(1, 1, 1, 1));
 
 	switch (m_state) {
 	case H_AsteroidField::eState::Title:
 		if (neko::g_inputSystem.getKeyDown(SDL_SCANCODE_SPACE)) {
 			m_state = eState::StartGame;
 			neko::g_audioSystem.playOneShot("ui");
+			//auto actor = m_scene->getActorByName("Background");
+			//if (actor) actor->active = false;
 		}
 		break;
 
 	case H_AsteroidField::eState::StartGame:
+
 		m_powerup = false;
 		m_pointTimer = 0;
 		m_powerupTimer = 32;
@@ -83,6 +73,11 @@ void H_AsteroidField::update(float dt) {
 		m_score = 0;
 	{
 		// create player
+		auto player = INSTANTIATE(Player, "Player");
+		player->m_game = this;
+		player->initialize();
+		m_scene->add(std::move(player));
+		/*
 		std::unique_ptr<Player> player = std::make_unique<Player>(200.0f, 0, neko::Transform{ {100.0f, 300.0f }, 0, 1});
 		player->tag = "Player";
 		player->m_game = this;
@@ -101,6 +96,7 @@ void H_AsteroidField::update(float dt) {
 
 		player->initialize();
 		m_scene->add(std::move(player));
+		*/
 	}
 		m_state = eState::Game;
 		break;
@@ -131,7 +127,14 @@ void H_AsteroidField::update(float dt) {
 				else if (j == 3) {
 					 asteroid = "Asteroid4.png";
 				}
-			std::unique_ptr<EnemyComponent> enemy = std::make_unique<EnemyComponent>(800.0f, 0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, neko::halfPi, 1});
+			auto enemy = INSTANTIATE(Enemy, "Enemy");
+			enemy->m_game = this;
+			enemy->initialize();
+			enemy->getComponent<neko::SpriteComponent>()->m_texture = GET_RESOURCE(neko::Texture, asteroid, neko::g_renderer);
+			enemy->transform = (neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, neko::halfPi, 1});
+			m_scene->add(std::move(enemy));
+			/*
+			std::unique_ptr<neko::Enemy> enemy = std::make_unique<neko::Enemy>(800.0f, 0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, neko::halfPi, 1});
 			enemy->tag = "Enemy";
 			enemy->m_game = this;
 			//create components
@@ -145,11 +148,17 @@ void H_AsteroidField::update(float dt) {
 			enemy->addComponent(std::move(collisionComponent));
 			
 			enemy->initialize();
-			m_scene->add(std::move(enemy));
+			m_scene->add(std::move(enemy));*/
 			}
 		}
 		if (m_powerupTimer <= 0) {
 			// create powerup
+			auto powerup = INSTANTIATE(Powerup, "Powerup");
+			powerup->m_game = this;
+			powerup->initialize();
+			powerup->transform = (neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, 0, 1.5});
+			m_scene->add(std::move(powerup));
+			/*
 			std::unique_ptr<Powerup> powerup = std::make_unique<Powerup>(0, neko::Transform{ { 800.0f, neko::randomf(neko::g_renderer.getHeight()) }, 0, 1.5});
 			powerup->tag = "Powerup";
 			powerup->m_game = this;
@@ -165,6 +174,7 @@ void H_AsteroidField::update(float dt) {
 
 			powerup->initialize();
 			m_scene->add(std::move(powerup));
+			*/
 			m_powerupTimer = 32;
 		}
 		if (m_powerup == true && m_powerDuration > 0) {
@@ -183,6 +193,7 @@ void H_AsteroidField::update(float dt) {
 		m_stateTimer = 1;
 		m_state = eState::PlayerDead;
 		break;
+
 	case H_AsteroidField::eState::PlayerDead:
 		neko::g_audioSystem.playOneShot("damage");
 
@@ -202,12 +213,16 @@ void H_AsteroidField::update(float dt) {
 		break;
 
 	case H_AsteroidField::eState::GameOver:
-		m_scene->removeAll();
 
-		std::unique_ptr<Title> title = std::make_unique<Title>(neko::Transform{ { 400.0f, 250.0f }, neko::halfPi, 6});//, add sprite);
+		m_scene->removeAll();
+		auto title = INSTANTIATE(Title, "Title");
+		title->m_game = this;
+		title->initialize();
+		m_scene->add(std::move(title));
+		/*std::unique_ptr<Title> title = std::make_unique<Title>(neko::Transform{ { 400.0f, 250.0f }, neko::halfPi, 6});//, add sprite);
 		title->tag = "Title";
 		title->m_game = this;
-		m_scene->add(std::move(title));
+		m_scene->add(std::move(title));*/
 		if (neko::g_inputSystem.getKeyDown(SDL_SCANCODE_SPACE)) {
 			m_scene->removeAll();
 			m_state = eState::Title;
@@ -219,28 +234,29 @@ void H_AsteroidField::update(float dt) {
 		//break;
 	}
 
-	m_scoreText->create(neko::g_renderer, std::to_string(m_score), { 1, 1, 1, 1 });
+	m_scene->getActorByName("Score")->getComponent<neko::TextRenderComponent>()->setText(std::to_string(m_score));
+
+	//m_scoreText->create(neko::g_renderer, std::to_string(m_score), { 1, 1, 1, 1 });
 	m_scene->update(dt);
 }
 
 void H_AsteroidField::draw(neko::Renderer& renderer) {
-	if (m_state == eState::Title) {
-		m_titleText->draw(renderer, 225, 250);
-		m_subTitleText->draw(renderer, 225, 275);
-	}
-	if (m_state == eState::GameOver) {
-		m_endText->draw(renderer, 50, 350);
-	}
-
-	m_scoreText->draw(renderer, 10, 10);
-	m_highScoreText->draw(renderer, neko::g_renderer.getWidth() - 275, 10);
 	m_scene->draw(renderer);
-
+	if (m_state != eState::Title) {
+		m_scene->getActorByName("Start")->active = false;
+		m_scene->getActorByName("Subtitle")->active = false;
+	}
+	if (m_state != eState::GameOver) {
+		m_scene->getActorByName("End")->active = false;
+	}	
+	if (m_state == eState::GameOver) {
+		m_scene->getActorByName("End")->active = true;
+	}
 	for (auto& star : stars) {
 		star.update(renderer.getWidth(), renderer.getWidth());
 		star.draw(neko::g_renderer);
 	}
-
-	
+	//m_scoreText->draw(renderer, 10, 10);
+	//m_highScoreText->draw(renderer, neko::g_renderer.getWidth() - 275, 10);
 	neko::g_particleSystem.draw(neko::g_renderer);
 }

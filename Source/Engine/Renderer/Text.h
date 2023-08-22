@@ -16,6 +16,7 @@ namespace neko {
 		~Text();
 		void create(Renderer& renderer, const std::string& text, const Color& color);
 		void draw(Renderer& renderer, int x, int y);
+		void draw(Renderer& renderer, const class Transform& transform);
 
 		friend class Font;
 		friend class Renderer;

@@ -13,6 +13,7 @@ namespace neko {
 		Actor(const neko::Transform& transform) :
 			transform{ transform }
 		{}
+		Actor(const Actor& other);
 
 		virtual bool initialize() override;
 		virtual void onDestroy() override;
@@ -39,6 +40,8 @@ namespace neko {
 		std::string tag;
 		float lifespan = -1.0f;
 		bool destroyed = false;
+		bool persistent = false;
+		bool prototype = false;
 
 	protected:
 		std::vector<std::unique_ptr<Component>> components;

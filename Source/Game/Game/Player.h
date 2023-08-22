@@ -2,23 +2,28 @@
 #include "Framework/Actor.h"
 #include "Framework/Components/PhysicsComponent.h"
 
-class Player : public neko::Actor {
-public:
-	Player(float speed, float turnRate, const neko::Transform& transform) :
-		neko::Actor{ transform },
-		speed{ speed },
-		m_turnRate{ turnRate }
-	{}
+namespace neko {
+	class Player : public neko::Actor {
+	public:
+		CLASS_DECLARATION(Player)
 
-	bool initialize() override;
-	void update(float dt) override;
-	void onCollision(Actor* other) override;
+		Player() = default;
+		Player(float speed, float turnRate, const neko::Transform& transform) :
+			neko::Actor{ transform },
+			speed{ speed },
+			m_turnRate{ turnRate }
+		{}
 
-private:
-	float speed = 0;
-	float m_turnRate = 0;
-	float m_health = 100;
-	bool dead = false;
+		bool initialize() override;
+		void update(float dt) override;
+		void onCollision(Actor* other) override;
 
-	neko::PhysicsComponent* m_physicsComponent = nullptr;
-};
+	private:
+		float speed = 0;
+		float m_turnRate = 0;
+		float m_health = 100;
+		bool dead = false;
+
+		neko::PhysicsComponent* m_physicsComponent = nullptr;
+	};
+}

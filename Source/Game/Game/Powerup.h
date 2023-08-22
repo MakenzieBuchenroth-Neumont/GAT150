@@ -1,19 +1,23 @@
 #pragma once
 #include "Framework/Actor.h"
 
-class Powerup : public neko::Actor {
-public:
-	Powerup(float speed, const neko::Transform& transform) :
-		neko::Actor{ transform },
-		speed{ speed }
-	{}
+namespace neko {
+	class Powerup : public neko::Actor {
+	public:
+	CLASS_DECLARATION(Powerup);
+		Powerup() = default;
+		//Powerup(float speed, const neko::Transform& transform) :
+			//neko::Actor{ transform },
+			//speed{ speed }
+		//{}
 
-	bool initialize() override;
-	void update(float dt) override;
-	void onCollision(Actor* other) override;
+		bool initialize() override;
+		void update(float dt) override;
+		void onCollision(Actor* other) override;
 
-	bool destroyed = false;
+		bool destroyed = false;
 
-private:
-	float speed = 0;
-};
+	private:
+		float speed = 0;
+	};
+}

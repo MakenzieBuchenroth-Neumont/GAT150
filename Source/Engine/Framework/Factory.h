@@ -6,7 +6,8 @@
 #include <map>
 
 #define CREATE_CLASS(classname) neko::Factory::Instance().create<neko::classname>(#classname);
-#define CREATE_CLASS_BASE(classbase, classname) neko::Factory::Instance().create<neko::classbase>(#classname);
+#define CREATE_CLASS_BASE(classbase, classname) neko::Factory::Instance().create<neko::classbase>(classname);
+#define INSTANTIATE(classbase, classname) neko::Factory::Instance().create<neko::classbase>(classname);
 
 namespace neko {
 	class CreatorBase {
@@ -24,36 +25,56 @@ namespace neko {
 		}
 	};
 
-	class Factory : public Singleton<Factory> {
+	template <typename T>
+	class PrototypeCreator : public CreatorBase {
 	public:
-		template <typename T>
-		void reg(const std::string& key);
-
-		template <typename T>
-		std::unique_ptr<T> create(const std::string& key);
-
-		friend class Singleton;
-
-	protected:
-		Factory() = default;
+		PrototypeCreator(std::unique_ptr<T> prototype) : m_prototype{ std::move(prototype) } {}
+		std::unique_ptr<class Object> create() override {
+			return m_prototype->clone();
+		}
 
 	private:
-		std::map<std::string, std::unique_ptr<CreatorBase>> m_registry;
-
+		std::unique_ptr<T> m_prototype;
 	};
 
-	template<typename T>
-	inline void Factory::reg(const std::string& key) {
-		INFO_LOG("Class registered: " << key);
-		m_registry[key] = std::make_unique<Creator<T>>();
-	}
+		class Factory : public Singleton<Factory> {
+		public:
+			template <typename T>
+			void reg(const std::string& key);
+			template <typename T>
+			void regPrototype(const std::string& key, std::unique_ptr<T> prototype);
 
-	template<typename T>
-	inline std::unique_ptr<T> Factory::create(const std::string& key) {
-		auto iter = m_registry.find(key);
-		if (iter != m_registry.end()) {
-			return std::unique_ptr<T>(dynamic_cast<T*>(iter->second->create().release()));
+			template <typename T>
+			std::unique_ptr<T> create(const std::string& key);
+
+			friend class Singleton;
+
+		protected:
+			Factory() = default;
+
+		private:
+			std::map<std::string, std::unique_ptr<CreatorBase>> m_registry;
+
+		};
+
+		template<typename T>
+		inline void Factory::reg(const std::string& key) {
+			INFO_LOG("Class registered: " << key);
+			m_registry[key] = std::make_unique<Creator<T>>();
 		}
-		return std::unique_ptr<T>();
-	}
-}
+
+		template<typename T>
+		inline void Factory::regPrototype(const std::string& key, std::unique_ptr<T> prototype) {
+			INFO_LOG("Prototype Class registered: " << key);
+			m_registry[key] = std::make_unique<PrototypeCreator<T>>(std::move(prototype));
+		}
+
+		template<typename T>
+		inline std::unique_ptr<T> Factory::create(const std::string& key) {
+			auto iter = m_registry.find(key);
+			if (iter != m_registry.end()) {
+				return std::unique_ptr<T>(dynamic_cast<T*>(iter->second->create().release()));
+			}
+			return std::unique_ptr<T>();
+		}
+};

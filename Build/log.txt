@@ -1,10 +1,18 @@
-INFO: Factory.h(47) Class registered: SpriteComponent
-INFO: Factory.h(47) Class registered: ModelRenderComponent
-INFO: Factory.h(47) Class registered: EnginePhysicsComponent
-INFO: Factory.h(47) Class registered: CircleCollisionComponent
-INFO: Factory.h(47) Class registered: Actor
-INFO: Main.cpp(24) Initialized Engine...
-INFO: Main.cpp(29) Initialized Memory...
-INFO: Main.cpp(63) Initialized Renderer...
-INFO: Main.cpp(69) Initialized Game...
-INFO: Texture.cpp(24) Checking for texture
+INFO: Factory.h(62) Class registered: Enemy
+INFO: Factory.h(62) Class registered: Player
+INFO: Factory.h(62) Class registered: Powerup
+INFO: Factory.h(62) Class registered: Title
+INFO: Factory.h(62) Class registered: TextRenderComponent
+INFO: Factory.h(62) Class registered: SpriteComponent
+INFO: Factory.h(62) Class registered: ModelRenderComponent
+INFO: Factory.h(62) Class registered: EnginePhysicsComponent
+INFO: Factory.h(62) Class registered: CircleCollisionComponent
+INFO: Factory.h(62) Class registered: Actor
+INFO: Main.cpp(25) Initialized Engine...
+INFO: Main.cpp(31) Initialized Memory...
+INFO: Main.cpp(37) Initialized Renderer...
+INFO: Factory.h(68) Prototype Class registered: Enemy
+INFO: Factory.h(68) Prototype Class registered: Player
+INFO: Factory.h(68) Prototype Class registered: Powerup
+INFO: Factory.h(68) Prototype Class registered: Title
+INFO: Main.cpp(43) Initialized Game...
