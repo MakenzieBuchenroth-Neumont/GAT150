@@ -4,6 +4,7 @@
 #include <cassert>
 #include <array>
 #include <map>
+#include <functional>
 
 #include "Core/Core.h"
 #include "Framework/Framework.h"

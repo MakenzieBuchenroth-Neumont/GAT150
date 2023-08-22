@@ -78,7 +78,7 @@ namespace neko {
 				dead = true;
 			}
 
-			dynamic_cast<H_AsteroidField*>(m_game)->setState(H_AsteroidField::eState::PlayerDeadStart);
+			neko::EventManager::Instance().dispatchEvent("onPlayerDead", 1);
 			destroyed = true;
 
 		}

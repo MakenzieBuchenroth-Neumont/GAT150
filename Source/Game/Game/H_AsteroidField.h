@@ -2,11 +2,12 @@
 #include "Framework/Game.h"
 #include "Renderer/Text.h"
 #include "Star.h"
+#include "Framework/Event/EventManager.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
 
-class H_AsteroidField : public neko::Game {
+class H_AsteroidField : public neko::Game, neko::IEventListener {
 
 public:
 	enum class eState {
@@ -28,6 +29,8 @@ public:
 	virtual void draw(neko::Renderer& renderer) override;
 
 	void setState(eState state) { m_state = state; }
+	void onAddPoints(const neko::Event& event);
+	void onPlayerDead(const neko::Event& event);
 
 	int m_highScore = 0;
 	bool m_powerup = false;

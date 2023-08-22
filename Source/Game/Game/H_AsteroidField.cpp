@@ -37,6 +37,10 @@ bool H_AsteroidField::initialize() {
 	m_scene->load("scene.json");
 	m_scene->initialize();
 
+	// add events
+	EVENT_SUBSCRIBE("AddPoints", H_AsteroidField::onAddPoints);
+	EVENT_SUBSCRIBE("onPlayerDead", H_AsteroidField::onPlayerDead);
+
 	return true;
 }
 
@@ -106,7 +110,8 @@ void H_AsteroidField::update(float dt) {
 		m_powerupTimer -= dt;
 		m_pointTimer += dt * 2.5;
 		if (m_pointTimer >= 1) {
-			addPoints(1);
+			neko::EventManager::Instance().dispatchEvent("AddPoints", 1);
+			//addPoints(1);
 			m_pointTimer = 0;
 		}
 		if (m_spawnTimer >= m_spawnTime) {
@@ -178,7 +183,7 @@ void H_AsteroidField::update(float dt) {
 			m_powerupTimer = 32;
 		}
 		if (m_powerup == true && m_powerDuration > 0) {
-			addPoints(1);
+			neko::EventManager::Instance().dispatchEvent("AddPoints", 1);
 			m_powerDuration -= dt;
 			if (m_powerDuration == 0) {
 				m_powerDuration = 5;
@@ -259,4 +264,12 @@ void H_AsteroidField::draw(neko::Renderer& renderer) {
 	//m_scoreText->draw(renderer, 10, 10);
 	//m_highScoreText->draw(renderer, neko::g_renderer.getWidth() - 275, 10);
 	neko::g_particleSystem.draw(neko::g_renderer);
+}
+
+void H_AsteroidField::onAddPoints(const neko::Event& event) {
+	m_score += std::get<int>(event.data);
+}
+
+void H_AsteroidField::onPlayerDead(const neko::Event& event) {
+	m_state = eState::PlayerDeadStart;
 }
