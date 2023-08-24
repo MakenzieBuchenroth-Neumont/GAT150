@@ -1,7 +1,3 @@
-INFO: Factory.h(62) Class registered: Enemy
-INFO: Factory.h(62) Class registered: Player
-INFO: Factory.h(62) Class registered: Powerup
-INFO: Factory.h(62) Class registered: Title
 INFO: Factory.h(62) Class registered: TextRenderComponent
 INFO: Factory.h(62) Class registered: SpriteComponent
 INFO: Factory.h(62) Class registered: ModelRenderComponent
@@ -10,13 +6,9 @@ INFO: Factory.h(62) Class registered: CircleCollisionComponent
 INFO: Factory.h(62) Class registered: Box2DPhysicsComponent
 INFO: Factory.h(62) Class registered: Box2DCollisionComponent
 INFO: Factory.h(62) Class registered: Actor
-INFO: Main.cpp(26) Initialized Engine...
-INFO: Main.cpp(32) Initialized Memory...
-INFO: Main.cpp(38) Initialized Renderer...
-INFO: Factory.h(68) Prototype Class registered: Enemy
-INFO: Factory.h(68) Prototype Class registered: Player
-INFO: Factory.h(68) Prototype Class registered: Powerup
-INFO: Factory.h(68) Prototype Class registered: Title
+INFO: Main.cpp(21) Initialized Engine...
+INFO: Main.cpp(27) Initialized Memory...
+INFO: Main.cpp(33) Initialized Renderer...
+INFO: Factory.h(68) Prototype Class registered: Background
 INFO: EventManager.cpp(14) Event subscribed: AddPoints
 INFO: EventManager.cpp(14) Event subscribed: onPlayerDead
-INFO: Main.cpp(44) Initialized Game...
