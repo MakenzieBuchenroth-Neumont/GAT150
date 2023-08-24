@@ -27,8 +27,8 @@ namespace neko {
 		template<typename T>
 		T* getComponent();
 
-		float getRadius() { return 30.0f; }
-		virtual void onCollision(Actor* other) {}
+		virtual void onCollisionEnter(Actor* other) {}
+		virtual void onCollisionExit(Actor* other) {}
 
 		class Scene* m_scene = nullptr;
 		friend class Scene;

@@ -2,6 +2,7 @@
 #include "Core/Json.h"
 #include "Framework/Factory.h"
 #include "Framework/Actor.h"
+#include "Framework/Components/PhysicsComponent.h"
 
 namespace neko {
 	class Enemy : public neko::Actor {
@@ -20,7 +21,7 @@ namespace neko {
 
 		bool initialize() override;
 		void update(float dt) override;
-		void onCollision(neko::Actor* other);
+		void onCollisionEnter(neko::Actor* other);
 
 
 	private:
@@ -30,5 +31,7 @@ namespace neko {
 		float m_fireRate = 0;
 		float m_fireTimer = 0;
 		float m_health = 10;
+
+		neko::PhysicsComponent* m_physicsComponent = nullptr;
 	};
 }

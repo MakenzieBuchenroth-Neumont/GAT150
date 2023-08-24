@@ -11,13 +11,11 @@ namespace neko {
 		bool Enemy::initialize() {
 		Actor::initialize();
 
+		m_physicsComponent = getComponent<neko::PhysicsComponent>();
+
 		auto collisionComponent = getComponent<neko::CollisionComponent>();
 		if (collisionComponent) {
-			auto renderComponent = getComponent<neko::RenderComponent>();
-			if (renderComponent) {
-				float scale = transform.scale;
-				collisionComponent->m_radius = renderComponent->getRadius() * scale;
-			}
+			
 		}
 
 		return true;
@@ -34,10 +32,12 @@ namespace neko {
 		}
 		neko::vec2 forward = neko::vec2{ -1, 0 };
 		speed = 75;
-		transform.position += forward * speed * neko::g_time.getDeltaTime();
+		//transform.position += forward * speed * neko::g_time.getDeltaTime();
+
+		m_physicsComponent->applyForce(forward * speed);
 	}
 
-	void Enemy::onCollision(neko::Actor* other) {
+	void Enemy::onCollisionEnter(neko::Actor* other) {
 		//
 	}
 

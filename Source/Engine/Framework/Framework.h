@@ -18,6 +18,9 @@
 
 #include "Framework/Components/CollisionComponent.h"
 #include "Framework/Components/CircleCollisionComponent.h"
+#include "Framework/Components/Box2DPhysicsComponent.h"
+#include "Framework/Components/Box2DCollisionComponent.h"
+
 
 #include "Framework/Resource/Resource.h"
 #include "Framework/Resource/ResourceManager.h"

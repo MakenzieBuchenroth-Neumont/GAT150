@@ -34,7 +34,7 @@ bool H_AsteroidField::initialize() {
 	}
 
 	m_scene = std::make_unique<neko::Scene>();
-	m_scene->load("scene.json");
+	m_scene->load("Scenes\\spaceScene.json");
 	m_scene->initialize();
 
 	// add events

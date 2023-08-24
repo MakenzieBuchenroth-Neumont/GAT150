@@ -7,6 +7,8 @@ namespace neko {
 		CLASS_DECLARATION(EnginePhysicsComponent)
 		virtual void update(float dt) override;
 		virtual void applyForce(const vec2& force) override;
+		// Inherited via PhysicsComponent
+		virtual void applyTorque(float torque) override;
 
 	};
 }

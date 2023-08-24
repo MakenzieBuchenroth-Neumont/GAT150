@@ -32,7 +32,7 @@ namespace neko {
 		transform.position += forward * speed * neko::g_time.getDeltaTime();
 	}
 
-	void Powerup::onCollision(Actor* other) {
+	void Powerup::onCollisionEnter(Actor* other) {
 
 	}
 

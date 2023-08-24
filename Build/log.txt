@@ -7,6 +7,8 @@ INFO: Factory.h(62) Class registered: SpriteComponent
 INFO: Factory.h(62) Class registered: ModelRenderComponent
 INFO: Factory.h(62) Class registered: EnginePhysicsComponent
 INFO: Factory.h(62) Class registered: CircleCollisionComponent
+INFO: Factory.h(62) Class registered: Box2DPhysicsComponent
+INFO: Factory.h(62) Class registered: Box2DCollisionComponent
 INFO: Factory.h(62) Class registered: Actor
 INFO: Main.cpp(26) Initialized Engine...
 INFO: Main.cpp(32) Initialized Memory...

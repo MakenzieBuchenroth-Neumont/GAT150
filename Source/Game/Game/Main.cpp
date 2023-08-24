@@ -50,10 +50,11 @@ int main(int argc, char* argv[]) {
 		neko::g_time.tick();
 		neko::g_inputSystem.update();
 		neko::g_audioSystem.update();
-		neko::g_particleSystem.update(neko::g_time.getDeltaTime());
 		if (neko::g_inputSystem.getKeyDown(SDL_SCANCODE_ESCAPE)) {
 			quit = true;
 		}
+		neko::g_particleSystem.update(neko::g_time.getDeltaTime());
+		neko::PhysicsSystem::Instance().update(neko::g_time.getDeltaTime());
 
 		// update game
 		game->update(neko::g_time.getDeltaTime());

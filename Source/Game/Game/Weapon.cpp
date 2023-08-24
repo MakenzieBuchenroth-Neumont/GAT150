@@ -17,7 +17,7 @@ void Weapon::update(float dt) {
 	}
 }
 
-void Weapon::onCollision(Actor* other) {
+void Weapon::onCollisionEnter(Actor* other) {
 	if (other->tag != tag) {
 		destroyed = true;
 	}

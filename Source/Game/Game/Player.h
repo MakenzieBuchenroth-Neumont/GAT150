@@ -16,7 +16,7 @@ namespace neko {
 
 		bool initialize() override;
 		void update(float dt) override;
-		void onCollision(Actor* other) override;
+		void onCollisionEnter(Actor* other) override;
 
 	private:
 		float speed = 0;

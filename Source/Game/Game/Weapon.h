@@ -8,7 +8,7 @@ public:
 		m_speed{ speed }
 	{ lifespan = 2.0f; }
 	void update(float dt) override;
-	void onCollision(Actor* other) override;
+	void onCollisionEnter(Actor* other) override;
 
 private:
 	float m_speed = 0;

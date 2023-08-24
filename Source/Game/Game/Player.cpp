@@ -53,7 +53,7 @@ namespace neko {
 
 	}
 
-	void Player::onCollision(Actor* other) {
+	void Player::onCollisionEnter(Actor* other) {
 		if (other->tag == "Enemy") {
 			// particle system variables
 			if (!dead) {

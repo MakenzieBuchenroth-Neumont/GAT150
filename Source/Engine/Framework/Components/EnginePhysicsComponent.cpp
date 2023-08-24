@@ -13,6 +13,10 @@ namespace neko {
 		m_velocity += force;
 	}
 
+	void EnginePhysicsComponent::applyTorque(float torque) {
+		//
+	}
+
 	void EnginePhysicsComponent::read(const json_t& value) {
 		//
 	}
