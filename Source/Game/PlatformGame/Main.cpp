@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
 	neko::MemoryTracker::initialize();
 	INFO_LOG("Initialized Memory...");
 	neko::seedRandom((unsigned int)time(nullptr));
-	neko::setFilePath("Assets");
+	neko::setFilePath("Assets/Platformer");
 
 	// create the game window
 	neko::g_renderer.initialize();

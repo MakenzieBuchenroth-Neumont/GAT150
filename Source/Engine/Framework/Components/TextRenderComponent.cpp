@@ -28,7 +28,7 @@ namespace neko
 		if (m_changed) {
 			m_changed = false;
 			// create text using text string and color
-			m_text->create(renderer, text, { 1, 1, 1, 1 });
+			m_text->create(renderer, text, color);
 		}
 		// draw text
 		m_text->draw(renderer, m_owner->transform);
@@ -46,5 +46,6 @@ namespace neko
 		READ_DATA(value, text);
 		READ_DATA(value, fontName);
 		READ_DATA(value, fontSize);
+		READ_DATA(value, color);
 	}
 }

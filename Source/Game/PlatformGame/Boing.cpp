@@ -9,7 +9,6 @@
 
 
 neko::Highscore highscoreManager;
-std::string asteroid;
 
 bool Boing::initialize() {
 	// initialize the input system
@@ -17,12 +16,9 @@ bool Boing::initialize() {
 
 	// create audio
 	neko::g_audioSystem.initialize();
-	neko::g_audioSystem.addAudio("bgm", "bgm.wav");
-	neko::g_audioSystem.addAudio("ui", "ui.wav");
-	neko::g_audioSystem.addAudio("damage", "damage.wav");
 
 	m_scene = std::make_unique<neko::Scene>();
-	m_scene->load("Scenes\\platformScene.json");
+	m_scene->load("Scenes/platformScene.json");
 	m_scene->initialize();
 
 	// add events
@@ -36,7 +32,6 @@ void Boing::shutdown() {
 }
 
 void Boing::update(float dt) {
-	int highScore = highscoreManager.readHighScore();
 
 	switch (m_state) {
 	case Boing::eState::Title:

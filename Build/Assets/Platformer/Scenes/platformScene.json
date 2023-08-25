@@ -1,0 +1,69 @@
+{
+	"actors": [
+		{
+			"type": "Actor",
+			"name": "Background",
+			"persistent": true,
+			"tag": "Background",
+			"transform": {
+				"position": [ 400, 300 ],
+				"scale": 0.5,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "Textures/City4.png",
+					"source": [ 0, 0, 1920, 1080 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Coin",
+			"persistent": true,
+			"tag": "Coin",
+			"transform": {
+				"position": [ 400, 400 ],
+				"scale": 2,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "SpriteAnimRenderComponent",
+					"defaultSequence": "idle",
+					"sequences": [
+						{
+							"name": "idle",
+							"fps": 12,
+							"numColumns": 8,
+							"numRows": 1,
+							"startFrame": 1,
+							"endFrame": 8,
+							"textureName": "Textures/coin.png"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Title",
+			"persistent": true,
+			"transform": {
+				"position": [ 393, 250 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "Fonts/alphabetized cassette tapes.ttf",
+					"fontSize": 200,
+					"text": "PLATFORMER",
+					"color": [ 0, 0, 0, 1 ]
+				}
+			]
+		}
+	]
+}
