@@ -7,6 +7,7 @@ namespace neko {
 	CLASS_DEFINITION(SpriteComponent)
 
 	bool SpriteComponent::initialize() {
+
 		if (!textureName.empty()) m_texture = GET_RESOURCE(Texture, textureName, g_renderer);
 		if (source.w == 0 && source.h == 0) {
 			if (m_texture) {

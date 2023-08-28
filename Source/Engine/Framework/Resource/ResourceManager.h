@@ -25,9 +25,13 @@ namespace neko {
 		}
 
 		res_t<T> resource = std::make_shared<T>();
-		resource->create(filename, args...);
-		m_resources[filename] = resource;
+		if (!resource->create(filename, args...))
+		{
+			WARNING_LOG("Could not create resource: " << filename);
+			return res_t<T>();
+		}
 
+		m_resources[filename] = resource;
 		return resource;
 	}
 }

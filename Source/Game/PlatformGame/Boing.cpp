@@ -35,6 +35,12 @@ void Boing::update(float dt) {
 
 	switch (m_state) {
 	case Boing::eState::Title:
+	//{
+		//auto actor = INSTANTIATE(Actor, "Wheel");
+		//actor->transform.position = { neko::random(0, neko::g_renderer.getWidth()), 300 };
+		//actor->initialize();
+		//m_scene->add(std::move(actor));
+	//}
 		break;
 
 	case Boing::eState::StartGame:

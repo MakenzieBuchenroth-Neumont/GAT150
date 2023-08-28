@@ -14,6 +14,9 @@ namespace neko {
 			transform{ transform }
 		{}
 		Actor(const Actor& other);
+		virtual ~Actor() {
+			onDestroy();
+		}
 
 		virtual bool initialize() override;
 		virtual void onDestroy() override;
