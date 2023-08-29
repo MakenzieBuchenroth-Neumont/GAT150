@@ -21,16 +21,16 @@ namespace neko {
 	void Player::update(float dt) {
 		Actor::update(dt);
 
+		bool onGround = (groundCount > 0);
 		float dir = 0;
 		if (neko::g_inputSystem.getKeyDown(SDL_SCANCODE_A)) dir += -1;
 		if (neko::g_inputSystem.getKeyDown(SDL_SCANCODE_D)) dir += 1;
 
 		neko::vec2 forward = neko::vec2{ 1, 0 };
 
-		m_physicsComponent->applyForce(forward * speed * dir);
+		m_physicsComponent->applyForce(forward * speed * dir * ((onGround) ? 1 : 0.25f));
 
 		//jump
-		bool onGround = (groundCount > 0);
 		if (onGround && neko::g_inputSystem.getKeyDown(SDL_SCANCODE_SPACE) && !neko::g_inputSystem.getPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 			neko::vec2 up = neko::vec2{ 0, -1};
 			m_physicsComponent->setVelocity(up * jump);

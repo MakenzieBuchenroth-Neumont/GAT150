@@ -85,12 +85,12 @@
 			"type": "Player",
 			"name": "Player",
 			"persistent": true,
-			"speed": 50,
+			"speed": 150,
 			"jump": 8,
 			"tag": "Player",
 			"transform": {
 				"position": [ 200, 350 ],
-				"scale": 2,
+				"scale": 3,
 				"rotation": 0
 			},
 			"components": [
@@ -122,7 +122,7 @@
 					"type": "Box2DPhysicsComponent",
 					"constrainAngle": true,
 					"damping": 0,
-					"gravityScale": 1
+					"gravityScale": 1.5
 				},
 				{
 					"type": "Box2DCollisionComponent",
