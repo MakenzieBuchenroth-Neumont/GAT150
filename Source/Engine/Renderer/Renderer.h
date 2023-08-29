@@ -35,6 +35,7 @@ namespace neko {
 		void drawTexture(class Texture* texture, float x, float y, float angle = 0.0f);
 		void drawTexture(class Texture* texture, const Transform& transform);
 		void drawTexture(class Texture* texture, const Rect& source, const Transform& transform);
+		void drawTexture(class Texture* texture, const Rect& source, const Transform& transform, const vec2 origin, bool flipH);
 
 		SDL_Renderer* m_renderer = nullptr;
 

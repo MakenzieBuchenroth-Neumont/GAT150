@@ -103,4 +103,22 @@ namespace neko {
 		// https://wiki.libsdl.org/SDL2/SDL_RenderCopyEx
 		SDL_RenderCopyEx(m_renderer, texture->m_texture, (SDL_Rect*)(& source), &dest, radiansToDegrees(mx.getRotation()), NULL, SDL_FLIP_NONE);
 	}
+
+	void Renderer::drawTexture(Texture* texture, const Rect& source, const Transform& transform, const vec2 origin, bool flipH) {
+		mat3 mx = transform.getMatrix();
+
+		vec2 position = mx.getTranslation();
+		vec2 size = vec2{ source.w, source.h } *mx.getScale();
+
+		SDL_Rect dest;
+		dest.x = (int)(position.x - (size.x * origin.x));
+		dest.y = (int)(position.y - (size.y * origin.y));
+		dest.w = (int)size.x;
+		dest.h = (int)size.y;
+
+		SDL_Point center{ (int)(size.x * origin.x, size.y * origin.y) };
+
+		// https://wiki.libsdl.org/SDL2/SDL_RenderCopyEx
+		SDL_RenderCopyEx(m_renderer, texture->m_texture, (SDL_Rect*)(&source), &dest, radiansToDegrees(mx.getRotation()), &center, (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+	}
 }

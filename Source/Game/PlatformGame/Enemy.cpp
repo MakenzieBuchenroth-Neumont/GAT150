@@ -8,6 +8,8 @@
 #include "Framework/Components/ModelRenderComponent.h"
 #include <Framework/Components/PhysicsComponent.h>
 #include "Framework/Components/CollisionComponent.h"
+#include "Enemy.h"
+#include "Player.h"
 
 
 namespace neko {
@@ -25,11 +27,14 @@ namespace neko {
 	void Enemy::update(float dt) {
 		Actor::update(dt);
 
-		float dir = 0;
+		neko::vec2 forward = neko::vec2{ 0, -1 }.rotate(transform.rotation);
+		Player* player = m_scene->getActor<Player>();
+		if (player)
+		{
+			neko::vec2 direction = player->transform.position - transform.position;
+			m_physicsComponent->applyForce(direction.normalized() * speed);
+		}
 
-		neko::vec2 forward = neko::vec2{ 1, 0 };
-
-		m_physicsComponent->applyForce(forward * speed * dir);
 
 		//jump}
 

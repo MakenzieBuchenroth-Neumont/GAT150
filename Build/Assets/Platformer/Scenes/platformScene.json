@@ -101,20 +101,20 @@
 						{
 							"name": "idle",
 							"fps": 12,
-							"numColumns": 6,
-							"numRows": 5,
+							"numColumns": 4,
+							"numRows": 1,
 							"startFrame": 1,
 							"endFrame": 4,
-							"textureName": "Textures/Dog.png"
+							"textureName": "Textures/Idle.png"
 						},
 						{
 							"name": "walk",
 							"fps": 12,
 							"numColumns": 6,
-							"numRows": 7,
+							"numRows": 1,
 							"startFrame": 1,
-							"endFrame": 12,
-							"textureName": "Textures/Dog.png"
+							"endFrame": 6,
+							"textureName": "Textures/Walk.png"
 						}
 					]
 				},
@@ -161,11 +161,13 @@
 				{
 					"type": "Box2DPhysicsComponent",
 					"constrainAngle": true,
-					"gravityScale": 1
+					"gravityScale": 1,
+					"damping":  0.9
 				},
 				{
 					"type": "Box2DCollisionComponent",
-					"restitution": 0.1
+					"restitution": 0.1,
+					"isTrigger":  true
 				}
 			]
 		},
@@ -204,7 +206,7 @@
 				},
 				{
 					"type": "Box2DCollisionComponent",
-					"size": [ 600, 20 ]
+					"size": [ 800, 20 ]
 				}
 			]
 		}

@@ -19,6 +19,7 @@ bool Boing::initialize() {
 
 	m_scene = std::make_unique<neko::Scene>();
 	m_scene->load("Scenes/platformScene.json");
+	m_scene->load("Scenes/tilemap.json");
 	m_scene->initialize();
 
 	// add events

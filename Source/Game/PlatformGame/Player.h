@@ -1,13 +1,13 @@
 #pragma once
 #include "Framework/Actor.h"
-#include "Framework/Components/PhysicsComponent.h"
+#include "Framework/Components/SpriteAnimRenderComponent.h"
 
 namespace neko {
 	class Player : public neko::Actor {
 	public:
 		CLASS_DECLARATION(Player)
 
-			Player() = default;
+		Player() = default;
 		Player(float speed, float turnRate, const neko::Transform& transform) :
 			neko::Actor{ transform },
 			speed{ speed },
@@ -24,6 +24,7 @@ namespace neko {
 		float jump = 0;
 		int groundCount = 0;
 
-		neko::PhysicsComponent* m_physicsComponent = nullptr;
+		class PhysicsComponent* m_physicsComponent = nullptr;
+		class SpriteAnimRenderComponent* m_spriteAnimComponent = nullptr;
 	};
 }

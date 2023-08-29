@@ -1,13 +1,8 @@
 #include "Player.h"
 #include "Boing.h"
-#include "Framework/Scene.h"
 #include "Input/InputSystem.h"
-#include "Framework/Emitter.h"
 #include "Renderer/ParticleSystem.h"
-#include "Framework/Components/SpriteComponent.h"
-#include "Framework/Components/ModelRenderComponent.h"
-#include <Framework/Components/PhysicsComponent.h>
-#include "Framework/Components/CollisionComponent.h"
+#include "Framework/Framework.h"
 
 
 namespace neko {
@@ -17,7 +12,8 @@ namespace neko {
 		Actor::initialize();
 
 		// cache off
-		m_physicsComponent = getComponent<neko::PhysicsComponent>();
+		m_physicsComponent = getComponent<PhysicsComponent>();
+		m_spriteAnimComponent = getComponent<SpriteAnimRenderComponent>();
 
 		return false;
 	}
@@ -38,6 +34,16 @@ namespace neko {
 		if (onGround && neko::g_inputSystem.getKeyDown(SDL_SCANCODE_SPACE) && !neko::g_inputSystem.getPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 			neko::vec2 up = neko::vec2{ 0, -1};
 			m_physicsComponent->setVelocity(up * jump);
+		}
+
+		// animation
+		vec2 velocity = m_physicsComponent->m_velocity;
+		if (std::fabs(velocity.x) > 0.2f) {
+			m_spriteAnimComponent->flipH = (velocity.x < -0.1f);
+			m_spriteAnimComponent->setSequence("walk");
+		}
+		else {
+			m_spriteAnimComponent->setSequence("idle");
 		}
 
 	}

@@ -1,6 +1,7 @@
 #pragma once
 #include "rapidjson/include/rapidjson/document.h"
 #include <string>
+#include <vector>
 #include "Math/Vector2.h"
 #include "Math/Color.h"
 #include "Math/Rect.h"
@@ -23,6 +24,8 @@ namespace neko {
 		static bool read(const rapidjson::Value& value, const std::string& name, vec2& data, bool required = false);
 		static bool read(const rapidjson::Value& value, const std::string& name, Color& data, bool required = false);
 		static bool read(const rapidjson::Value& value, const std::string& name, Rect& data, bool required = false);
+		static bool read(const rapidjson::Value& value, const std::string& name, std::vector<std::string>& data, bool required = false);
+		static bool read(const rapidjson::Value& value, const std::string& name, std::vector<int>& data, bool required = false);
 	};
 
 	using json_t = rapidjson::Value;

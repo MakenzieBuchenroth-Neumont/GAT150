@@ -26,11 +26,13 @@ namespace neko {
 	}
 
 	void SpriteComponent::draw(Renderer& renderer) {
-		renderer.drawTexture(m_texture.get(), source, m_owner->transform);
+		renderer.drawTexture(m_texture.get(), source, m_owner->transform, origin, flipH);
 	}
 
 	void SpriteComponent::read(const json_t& value) {
 		READ_DATA(value, textureName);
 		READ_DATA(value, source);
+		READ_DATA(value, flipH);
+		READ_DATA(value, origin);
 	}
 }
