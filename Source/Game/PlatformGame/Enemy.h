@@ -22,8 +22,9 @@ namespace neko {
 	private:
 		float speed = 0;
 		float jump = 0;
-		int groundCount = 0;
+		bool destroyed = false;
 
-		neko::PhysicsComponent* m_physicsComponent = nullptr;
+		class PhysicsComponent* m_physicsComponent = nullptr;
+		class SpriteAnimRenderComponent* m_spriteAnimComponent = nullptr;
 	};
 }

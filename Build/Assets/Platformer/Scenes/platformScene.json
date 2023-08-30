@@ -6,78 +6,14 @@
 			"persistent": true,
 			"tag": "Background",
 			"transform": {
-				"position": [ 400, 300 ],
-				"scale": 0.5,
+				"position": [ 300, 300 ],
+				"scale": 1,
 				"rotation": 0
 			},
 			"components": [
 				{
 					"type": "SpriteComponent",
-					"textureName": "Textures/City4.png",
-					"source": [ 0, 0, 1920, 1080 ]
-				}
-			]
-		},
-		{
-			"type": "Actor",
-			"name": "Coin",
-			"persistent": true,
-			"tag": "Coin",
-			"transform": {
-				"position": [ 400, 400 ],
-				"scale": 2,
-				"rotation": 0
-			},
-			"components": [
-				{
-					"type": "SpriteAnimRenderComponent",
-					"defaultSequenceName": "idle",
-					"sequences": [
-						{
-							"name": "idle",
-							"fps": 12,
-							"numColumns": 8,
-							"numRows": 1,
-							"startFrame": 1,
-							"endFrame": 8,
-							"textureName": "Textures/coin.png"
-						}
-					]
-				},
-				{
-					"type": "Box2DPhysicsComponent",
-					"damping": 0,
-					"gravityScale": 1,
-					"constrainAngle": true
-				},
-				{
-					"type": "Box2DCollisionComponent",
-					"restitution": 1
-				}
-			]
-		},
-		{
-			"type": "Actor",
-			"name": "Wheel",
-			"persistent": true,
-			"prototype": true,
-			"tag": "Wheel",
-			"transform": {
-				"position": [ 380, 300 ],
-				"scale": 0.3,
-				"rotation": 0
-			},
-			"components": [
-				{
-					"type": "SpriteComponent",
-					"textureName": "Textures/wheels.png"
-				},
-				{
-					"type": "Box2DPhysicsComponent"
-				},
-				{
-					"type": "Box2DCollisionComponent",
-					"restitution": 0.1
+					"textureName": "Textures/Field.png"
 				}
 			]
 		},
@@ -86,88 +22,423 @@
 			"name": "Player",
 			"persistent": true,
 			"speed": 150,
-			"jump": 8,
 			"tag": "Player",
 			"transform": {
-				"position": [ 200, 350 ],
+				"position": [ 300, 300 ],
 				"scale": 3,
 				"rotation": 0
 			},
 			"components": [
 				{
 					"type": "SpriteAnimRenderComponent",
-					"defaultSequenceName": "idle",
+					"defaultSequenceName": "idleUp",
+					"source": [ 0, 0, 30, 45 ],
+					"origin": [ 0.5, 0 ],
 					"sequences": [
 						{
-							"name": "idle",
+							"name": "idleUp",
 							"fps": 12,
-							"numColumns": 4,
-							"numRows": 1,
-							"startFrame": 1,
-							"endFrame": 4,
-							"textureName": "Textures/Idle.png"
+							"numColumns": 3,
+							"numRows": 4,
+							"startFrame": 11,
+							"endFrame": 11,
+							"textureName": "Textures/dog.png"
 						},
 						{
-							"name": "walk",
+							"name": "idleDown",
 							"fps": 12,
-							"numColumns": 6,
+							"numColumns": 3,
+							"numRows": 4,
+							"startFrame": 2,
+							"endFrame": 2,
+							"textureName": "Textures/dog.png"
+						},
+						{
+							"name": "idleLeft",
+							"fps": 12,
+							"numColumns": 3,
+							"numRows": 4,
+							"startFrame": 4,
+							"endFrame": 4,
+							"textureName": "Textures/dog.png"
+						},
+						{
+							"name": "idleRight",
+							"fps": 12,
+							"numColumns": 3,
+							"numRows": 4,
+							"startFrame": 8,
+							"endFrame": 8,
+							"textureName": "Textures/dog.png"
+						},
+						{
+							"name": "walkUp",
+							"fps": 12,
+							"numColumns": 3,
+							"numRows": 4,
+							"startFrame": 10,
+							"endFrame": 12,
+							"textureName": "Textures/dog.png"
+						},
+						{
+							"name": "walkDown",
+							"fps": 12,
+							"numColumns": 3,
+							"numRows": 4,
+							"startFrame": 1,
+							"endFrame": 3,
+							"textureName": "Textures/dog.png"
+						},
+						{
+							"name": "walkLeft",
+							"fps": 12,
+							"numColumns": 3,
+							"numRows": 4,
+							"startFrame": 4,
+							"endFrame": 6,
+							"textureName": "Textures/dog.png"
+						},
+						{
+							"name": "walkRight",
+							"fps": 12,
+							"numColumns": 3,
+							"numRows": 4,
+							"startFrame": 7,
+							"endFrame": 9,
+							"textureName": "Textures/dog.png"
+						},
+						{
+							"name": "bork",
+							"fps": 12,
+							"numColumns": 3,
 							"numRows": 1,
 							"startFrame": 1,
-							"endFrame": 6,
-							"textureName": "Textures/Walk.png"
+							"endFrame": 3,
+							"textureName": "Textures/dog_bork.png"
 						}
 					]
 				},
 				{
 					"type": "Box2DPhysicsComponent",
 					"constrainAngle": true,
-					"damping": 0,
-					"gravityScale": 1.5
+					"damping": 10,
+					"gravityScale": 0
 				},
 				{
 					"type": "Box2DCollisionComponent",
-					"restitution": 0.1
+					"restitution": 0
 				}
 			]
 		},
 		{
 			"type": "Enemy",
 			"name": "Enemy",
+			"prototype": true,
+			"speed": 10,
 			"tag": "Enemy",
-			"persistent": true,
-			"speed": 50,
-			"jump": 8,
 			"transform": {
-				"position": [ 200, 350 ],
-				"scale": 2,
+				"position": [ 300, 300 ],
+				"scale": 3,
 				"rotation": 0
 			},
 			"components": [
 				{
 					"type": "SpriteAnimRenderComponent",
-					"defaultSequenceName": "walk",
+					"defaultSequenceName": "whiteDown",
+					"source": [ 0, 0, 30, 45 ],
+					"origin": [ 0.5, 1 ],
 					"sequences": [
 						{
-							"name": "walk",
+							"name": "whiteDown",
 							"fps": 12,
-							"numColumns": 6,
-							"numRows": 1,
+							"numColumns": 12,
+							"numRows": 8,
 							"startFrame": 1,
+							"endFrame": 3,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "whitLeft",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 13,
+							"endFrame": 16,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "whiteRight",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 25,
+							"endFrame": 28,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "whiteUp",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 37,
+							"endFrame": 40,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "grayDown",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 4,
 							"endFrame": 6,
-							"textureName": "Textures/Cat.png"
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "grayLeft",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 16,
+							"endFrame": 18,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "grayRight",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 28,
+							"endFrame": 30,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "grayUp",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 40,
+							"endFrame": 42,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "brownDown",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 7,
+							"endFrame": 9,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "brownLeft",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 19,
+							"endFrame": 21,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "brownRight",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 31,
+							"endFrame": 33,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "brownUp",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 43,
+							"endFrame": 45,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "blackDown",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 10,
+							"endFrame": 12,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "blackLeft",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 22,
+							"endFrame": 24,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "blackRight",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 34,
+							"endFrame": 36,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "tanDown",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 49,
+							"endFrame": 51,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "tanLeft",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 61,
+							"endFrame": 63,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "tanRight",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 49,
+							"endFrame": 51,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "tanUp",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 85,
+							"endFrame": 87,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "siamDown",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 52,
+							"endFrame": 54,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "siamLeft",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 64,
+							"endFrame": 66,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "siamRight",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 76,
+							"endFrame": 78,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "siamUp",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 88,
+							"endFrame": 90,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "caliDown",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 55,
+							"endFrame": 57,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "caliLeft",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 67,
+							"endFrame": 69,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "caliRight",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 80,
+							"endFrame": 82,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "caliUp",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 91,
+							"endFrame": 93,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "stripeDown",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 58,
+							"endFrame": 60,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "stripeLeft",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 70,
+							"endFrame": 72,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "stripeRight",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 82,
+							"endFrame": 84,
+							"textureName": "Textures/cats.png"
+						},
+						{
+							"name": "stripeUp",
+							"fps": 12,
+							"numColumns": 12,
+							"numRows": 8,
+							"startFrame": 94,
+							"endFrame": 96,
+							"textureName": "Textures/cats.png"
 						}
 					]
 				},
 				{
 					"type": "Box2DPhysicsComponent",
 					"constrainAngle": true,
-					"gravityScale": 1,
-					"damping":  0.9
+					"damping": 0.98,
+					"gravityScale": 0
 				},
 				{
 					"type": "Box2DCollisionComponent",
-					"restitution": 0.1,
-					"isTrigger":  true
+					"isTrigger": true,
+					"restitution": 0
 				}
 			]
 		},
@@ -176,7 +447,7 @@
 			"name": "Title",
 			"persistent": true,
 			"transform": {
-				"position": [ 393, 250 ],
+				"position": [ 300, 300 ],
 				"scale": 1,
 				"rotation": 0
 			},
@@ -192,12 +463,70 @@
 		},
 		{
 			"type": "Actor",
-			"tag": "Ground",
+			"name": "Subtitle",
+			"persistent": true,
 			"transform": {
-				"position": [
-					400,
-					520
-				]
+				"position": [ 300, 375 ],
+				"scale": 0.3,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "Fonts/alphabetized cassette tapes.ttf",
+					"fontSize": 75,
+					"text": "PRESS ENTER TO PLAY",
+					"color": [ 0, 0, 0, 1 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Score",
+			"persistent": true,
+			"transform": {
+				"position": [ 60, 25 ],
+				"scale": 0.3,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "Fonts/alphabetized cassette tapes.ttf",
+					"fontSize": 75,
+					"text": "Score: 0",
+					"color": [ 0, 0, 0, 1 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "HiScore",
+			"persistent": true,
+			"transform": {
+				"position": [ 460, 25 ],
+				"scale": 0.3,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "Fonts/alphabetized cassette tapes.ttf",
+					"fontSize": 75,
+					"text": "High Score: 0",
+					"color": [ 0, 0, 0, 1 ]
+				}
+			]
+		},
+		{
+			"type": "Weapon",
+			"prototype": true,
+			"name": "Bark",
+			"tag": "Bark",
+			"speed": 5,
+			"transform": {
+				"position": [ 1, 1 ],
+				"scale": 4
 			},
 			"components": [
 				{
@@ -206,9 +535,9 @@
 				},
 				{
 					"type": "Box2DCollisionComponent",
-					"size": [ 800, 20 ]
+					"size": [ 20, 20 ]
 				}
 			]
 		}
 	]
-}
+		}

@@ -36,7 +36,7 @@ namespace neko {
 	}
 
 	vec2 Texture::getSize() {
-		//ASSERT_LOG(m_texture != nullptr, "No texture found.");
+		ASSERT_LOG(m_texture != nullptr, "No texture found.");
 		SDL_Point point;
 		// https://wiki.libsdl.org/SDL2/SDL_QueryTexture
 		SDL_QueryTexture(m_texture, NULL, NULL, &point.x, &point.y);

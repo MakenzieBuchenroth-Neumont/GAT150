@@ -30,6 +30,7 @@ public:
 	void setState(eState state) { m_state = state; }
 	void onAddPoints(const neko::Event& event);
 	void onPlayerDead(const neko::Event& event);
+	void onEnemyDead(const neko::Event& event);
 
 	int m_highScore = 0;
 	bool m_powerup = false;

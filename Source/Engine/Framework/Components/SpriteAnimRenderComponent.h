@@ -27,7 +27,7 @@ namespace neko {
 		bool initialize() override;
 		void update(float dt) override;
 
-		void setSequence(const std::string& name);
+		void setSequence(const std::string& name, bool update = true);
 		void updateSource();
 
 	public:

@@ -16,7 +16,7 @@ namespace neko {
 
 				(*iter)->update(dt);
 			}
-				iter = ((*iter)->destroyed) ? iter = m_actors.erase(iter) : ++iter;
+				iter = ((*iter)->destroyed) ? m_actors.erase(iter) : ++iter;
 		}
 
 		// check collisions

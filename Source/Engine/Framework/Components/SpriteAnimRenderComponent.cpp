@@ -9,8 +9,11 @@ namespace neko {
 	bool SpriteAnimRenderComponent::initialize() {
 		SpriteComponent::initialize();
 
-		setSequence(defaultSequenceName);
-		updateSource();
+		setSequence(defaultSequenceName, false);
+
+		if (source.w == 0 && source.h == 0) {
+			updateSource();
+		}
 
 		return true;
 	}
@@ -28,7 +31,7 @@ namespace neko {
 		updateSource();
 	}
 
-	void SpriteAnimRenderComponent::setSequence(const std::string& name) {
+	void SpriteAnimRenderComponent::setSequence(const std::string& name, bool update) {
 		// prevent setting sequence again
 		if (m_sequence && m_sequence->name == name) return;
 
@@ -40,6 +43,8 @@ namespace neko {
 			// reset frame info
 			frame = m_sequence->startFrame;
 			frameTimer = 1.0f / m_sequence->fps;
+
+			if (update) updateSource();
 		}
 	}
 

@@ -10,8 +10,7 @@ namespace neko {
 		Player() = default;
 		Player(float speed, float turnRate, const neko::Transform& transform) :
 			neko::Actor{ transform },
-			speed{ speed },
-			jump{ jump }
+			speed{ speed }
 		{}
 
 		bool initialize() override;
@@ -21,8 +20,6 @@ namespace neko {
 
 	private:
 		float speed = 0;
-		float jump = 0;
-		int groundCount = 0;
 
 		class PhysicsComponent* m_physicsComponent = nullptr;
 		class SpriteAnimRenderComponent* m_spriteAnimComponent = nullptr;

@@ -34,9 +34,19 @@ namespace neko {
 	}
 
 	void PhysicsSystem::setCollisionBox(b2Body* body, const CollisionData& data, class Actor* actor) {
-		b2PolygonShape shape;
 		Vector2 worldSize = screenToWorld(data.size * 0.5f);
-		shape.SetAsBox(worldSize.x, worldSize.y);
+		Vector2 worldOffset = screenToWorld(data.size * data.offset);
+
+		b2Vec2 vs[4] =
+		{
+			{ -worldSize.x - worldOffset.x, -worldSize.y - worldOffset.y },
+			{  worldSize.x - worldOffset.x, -worldSize.y - worldOffset.y },
+			{  worldSize.x - worldOffset.x,  worldSize.y - worldOffset.y },
+			{ -worldSize.x - worldOffset.x,  worldSize.y + -worldOffset.y },
+		};
+
+		b2PolygonShape shape;
+		shape.Set(vs, 4);
 
 		b2FixtureDef fixtureDef;
 		fixtureDef.density = data.density;

@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 	// create the game window
 	neko::g_renderer.initialize();
 	INFO_LOG("Initialized Renderer...");
-	neko::g_renderer.createWindow("Boing", 800, 600);
+	neko::g_renderer.createWindow("Boing", 600, 600);
 
 	// initialize game
 	unique_ptr<Boing> game = make_unique<Boing>();

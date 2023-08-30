@@ -6,14 +6,15 @@
 namespace neko {
 	CLASS_DEFINITION(Box2DCollisionComponent)
 
-	bool Box2DCollisionComponent::initialize() {
+		bool Box2DCollisionComponent::initialize() {
 		auto component = m_owner->getComponent<Box2DPhysicsComponent>();
 		if (component) {
-			if (data.size.x == 0 && data.size.y == 0) {
-				auto spriteComponent = m_owner->getComponent<SpriteComponent>();
-				if (spriteComponent) {
+			auto spriteComponent = m_owner->getComponent<SpriteComponent>();
+			if (spriteComponent) {
+				if (data.size.x == 0 && data.size.y == 0) {
 					data.size = vec2{ spriteComponent->source.w, spriteComponent->source.h };
 				}
+				data.offset = spriteComponent->origin - vec2{ 0.5f, 0.5f };
 			}
 
 			data.size = data.size * scaleOffset * m_owner->transform.scale;
